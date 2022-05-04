@@ -212,5 +212,18 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="252dp" />
 
+        <ImageView
+            android:id="@+id/iVpapelera"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/papelera"
+            app:layout_constraintBottom_toTopOf="@+id/cardViewJuego"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.759"
+            app:layout_constraintStart_toEndOf="@+id/iVjuegoDetalle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.915"
+            tools:srcCompat="@drawable/papelera" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

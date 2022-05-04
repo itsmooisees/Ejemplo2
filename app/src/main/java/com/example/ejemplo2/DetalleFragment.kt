@@ -76,6 +76,7 @@ class DetalleFragment : Fragment() {
 
             //Aplicamos la imagen con el string que viene de args
             Glide.with(iVjuegoDetalle.context).load(args.juego.foto).into(iVjuegoDetalle)
+            //OJO PARA MOSTRAR U OCULTAR ALGO: setVisibility(View.GONE/VISIBLE)
         }
     }
 
@@ -176,6 +177,7 @@ class DetalleFragment : Fragment() {
     }
 
 
+    //Puede ser que exista una forma más simple de insertar en la bbdd sin tener que recurrir a un hashmap, pero de momento esto funciona perfectamente, si tengo tiempo lo miraré
     //Función para actualizar cambios en un hijo de la bbdd, ya sea para añadir o eliminar
     @SuppressLint("SetTextI18n")
     private fun actualiza(conjunto: Float, personas: Int, usuarios: String, valoracs: String, child: DataSnapshot) {

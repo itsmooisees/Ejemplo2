@@ -26,17 +26,21 @@ class FeedFragment : Fragment() {
     private val myRef = database.getReference("juegos") //Obtenemos la referencia de la tabla indicada
     private lateinit var messagesListener: ValueEventListener
     private val juegosList: MutableList<Juego> = ArrayList() //Creamos una MutableList (ArrayList) para guardar todos los juegos que haya
+    private var titulosFb = "" //Variable para guardar la concatenación de títulos
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
         val user = Firebase.auth.currentUser
+
+        creaRecyclerView()
 
         binding.apply {
             buttonUsuario.text = user?.displayName //Setteamos en el botón el nombre del usuario
 
             //onclicklistener para pasar de la feed al fragment de nuevo juego
             buttonJuego.setOnClickListener { view: View ->
-                view.findNavController().navigate(R.id.action_feedFragment_to_juegoFragment)
+                val action = FeedFragmentDirections.actionFeedFragmentToJuegoFragment(titulosFb) //Le adjuntamos el argumento que queremos pasar al fragment juego
+                view.findNavController().navigate(action)
             }
 
             //onclicklistener para pasar de la feed al fragment de usuario
@@ -44,8 +48,6 @@ class FeedFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_feedFragment_to_userFragment)
             }
         }
-
-        creaRecyclerView()
 
         return binding.root
     }
@@ -63,8 +65,11 @@ class FeedFragment : Fragment() {
                 juegosList.clear()
                 //Hacemos un foreach para cada registro que haya en el conjunto
                 dataSnapshot.children.forEach { child ->
+                    val currentTit = child.child("titulo").getValue<String>()//Obtenemos el título del hijo actual
+                    titulosFb += "$currentTit," //Lo concatenamos al string de los títulos
+
                     //Creamos un objeto juego con cada dato del registro en concreto
-                    val juego = Juego(child.child("titulo").getValue<String>(), //Obtenemos el dato por su clave, y lo obtenemos según su tipo
+                    val juego = Juego(currentTit, //Obtenemos el dato por su clave, y lo obtenemos según su tipo
                         child.child("genero").getValue<String>(),
                         child.child("anio").getValue<Int>(),
                         child.child("descr").getValue<String>(),

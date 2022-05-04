@@ -46,6 +46,7 @@
     <string name="url">URL</string>
     <string name="fechaInc">La fecha introducida no es correcta</string>
     <string name="noUrl">No has introducido una URL válida</string>
+    <string name="exis">¡Ese juego ya se ha añadido!</string>
     <string name="aniadido">Has añadido el juego correctamente</string>
 
 
