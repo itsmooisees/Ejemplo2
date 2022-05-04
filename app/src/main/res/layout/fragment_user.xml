@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/wallpaper"
+        tools:context=".UserFragment" >
+
+        <TextView
+            android:id="@+id/tVus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/usuario"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.092" />
+
+        <TextView
+            android:id="@+id/tVuserUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/user"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.115"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVinfo"
+            app:layout_constraintVertical_bias="0.128" />
+
+        <TextView
+            android:id="@+id/tVuserFb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/nunitobo"
+            android:text="@string/user"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tVuserUs"
+            app:layout_constraintTop_toBottomOf="@+id/tVuserUs" />
+
+        <TextView
+            android:id="@+id/tVemailUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/email"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVuserFb"
+            app:layout_constraintTop_toBottomOf="@+id/tVuserFb"
+            app:layout_constraintVertical_bias="0.143" />
+
+        <TextView
+            android:id="@+id/tVemailFb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/nunitobo"
+            android:text="@string/email"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tVemailUs"
+            app:layout_constraintTop_toBottomOf="@+id/tVemailUs" />
+
+        <TextView
+            android:id="@+id/tVinfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/nunitobo"
+            android:text="@string/info"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVus"
+            app:layout_constraintVertical_bias="0.092" />
+
+        <Button
+            android:id="@+id/buttonMod"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_color"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/modificar"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonElim"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVemailFb"
+            app:layout_constraintVertical_bias="0.412" />
+
+        <Button
+            android:id="@+id/buttonElim"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_color"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/eliminar"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.774"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVemailFb"
+            app:layout_constraintVertical_bias="0.412" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

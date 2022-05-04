@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/primerFragment">
+
+    <fragment
+        android:id="@+id/primerFragment"
+        android:name="com.example.ejemplo2.PrimerFragment"
+        android:label="PrimerFragment"
+        tools:layout="@layout/fragment_primer">
+        <action
+            android:id="@+id/action_primerFragment_to_creaFragment"
+            app:destination="@id/creaFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_primerFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/primerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/creaFragment"
+        android:name="com.example.ejemplo2.CreaFragment"
+        android:label="CreaFragment"
+        tools:layout="@layout/fragment_crea">
+        <action
+            android:id="@+id/action_creaFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/primerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.ejemplo2.FeedFragment"
+        android:label="FeedFragment"
+        tools:layout="@layout/fragment_feed">
+        <action
+            android:id="@+id/action_feedFragment_to_juegoFragment"
+            app:destination="@id/juegoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_feedFragment_to_userFragment"
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_feedFragment_to_detalleFragment"
+            app:destination="@id/detalleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/juegoFragment"
+        android:name="com.example.ejemplo2.JuegoFragment"
+        android:label="JuegoFragment"
+        tools:layout="@layout/fragment_juego">
+        <action
+            android:id="@+id/action_juegoFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/feedFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.ejemplo2.UserFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_eliminaFragment"
+            app:destination="@id/eliminaFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_userFragment_to_modificaFragment"
+            app:destination="@id/modificaFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eliminaFragment"
+        android:name="com.example.ejemplo2.EliminaFragment"
+        android:label="EliminaFragment"
+        tools:layout="@layout/fragment_elimina">
+        <action
+            android:id="@+id/action_eliminaFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/feedFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/modificaFragment"
+        android:name="com.example.ejemplo2.ModificaFragment"
+        android:label="ModificaFragment"
+        tools:layout="@layout/fragment_modifica"/>
+
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="com.example.ejemplo2.DetalleFragment"
+        android:label="DetalleFragment"
+        tools:layout="@layout/fragment_detalle">
+        <argument android:name="juego"
+            app:argType="com.example.ejemplo2.Juego" />
+    </fragment>
+</navigation>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/juegoConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/wallpaper"
+        tools:context=".JuegoFragment" >
+
+        <TextView
+            android:id="@+id/tVfoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/caratula"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTdescr"
+            app:layout_constraintTop_toBottomOf="@+id/eTdescr"
+            app:layout_constraintVertical_bias="0.142" />
+
+        <Button
+            android:id="@+id/buttonAniade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/button_color"
+            android:fontFamily="@font/nunitobl"
+            android:minHeight="48dp"
+            android:text="@string/plus"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.857"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eTurl" />
+
+        <TextView
+            android:id="@+id/tVnuevo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/nuevo"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.465"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.07" />
+
+        <TextView
+            android:id="@+id/tVtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/titulo"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVnuevo"
+            app:layout_constraintTop_toBottomOf="@+id/tVnuevo"
+            app:layout_constraintVertical_bias="0.06" />
+
+        <EditText
+            android:id="@+id/eTtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/tituloeT"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVtitulo"
+            app:layout_constraintTop_toBottomOf="@+id/tVtitulo"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tVgenero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/genero"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTtitulo"
+            app:layout_constraintTop_toBottomOf="@+id/eTtitulo"
+            app:layout_constraintVertical_bias="0.056" />
+
+        <EditText
+            android:id="@+id/eTgenero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/genero"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVgenero"
+            app:layout_constraintTop_toBottomOf="@+id/tVgenero"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tVanio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/anioLanz"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTgenero"
+            app:layout_constraintTop_toBottomOf="@+id/eTgenero"
+            app:layout_constraintVertical_bias="0.072" />
+
+        <EditText
+            android:id="@+id/eTanio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/anio"
+            android:inputType="number"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVanio"
+            app:layout_constraintTop_toBottomOf="@+id/tVanio"
+            tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tVdescr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobl"
+            android:text="@string/descr"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTanio"
+            app:layout_constraintTop_toBottomOf="@+id/eTanio"
+            app:layout_constraintVertical_bias="0.096" />
+
+        <EditText
+            android:id="@+id/eTdescr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/descr"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVdescr"
+            app:layout_constraintTop_toBottomOf="@+id/tVdescr"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/eTurl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/url"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAniade"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVfoto"
+            app:layout_constraintTop_toBottomOf="@+id/tVfoto"
+            tools:ignore="TextContrastCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

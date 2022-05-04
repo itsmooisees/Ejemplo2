@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/creaConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/wallpaper"
+        tools:context=".CreaFragment">
+
+        <TextView
+            android:id="@+id/tVcrear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/crear"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.087" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCrear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_color"
+            android:enabled="false"
+            android:fontFamily="@font/pretendo"
+            android:text="@string/crearB"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/checkBoxTerm"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/checkBoxTerm"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxTerm"
+            app:layout_constraintVertical_bias="0.213" />
+
+        <EditText
+            android:id="@+id/eTuser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/user"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tVcrear"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tVcrear"
+            app:layout_constraintTop_toBottomOf="@+id/tVcrear"
+            app:layout_constraintVertical_bias="0.078"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/eTemailCrea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eTuser"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTuser"
+            app:layout_constraintTop_toBottomOf="@+id/eTuser"
+            app:layout_constraintVertical_bias="0.062"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/eTpassCrea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/pass"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eTemailCrea"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTemailCrea"
+            app:layout_constraintTop_toBottomOf="@+id/eTemailCrea"
+            app:layout_constraintVertical_bias="0.081"
+            tools:ignore="TextContrastCheck" />
+
+        <CheckBox
+            android:id="@+id/checkBoxTerm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobo"
+            android:minHeight="48dp"
+            android:text="@string/checkBox"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eTconfirma"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTconfirma"
+            app:layout_constraintTop_toBottomOf="@+id/eTconfirma"
+            app:layout_constraintVertical_bias="0.181" />
+
+        <EditText
+            android:id="@+id/eTconfirma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/nunitobo"
+            android:hint="@string/conf"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eTpassCrea"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/eTpassCrea"
+            app:layout_constraintTop_toBottomOf="@+id/eTpassCrea"
+            app:layout_constraintVertical_bias="0.098"
+            tools:ignore="TextContrastCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

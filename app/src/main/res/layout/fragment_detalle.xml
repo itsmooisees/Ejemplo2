@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/detalleConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/wallpaper"
+        tools:context=".DetalleFragment">
+
+        <TextView
+            android:id="@+id/tVtituloDetalle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:fontFamily="@font/nunitobl"
+            android:gravity="center"
+            android:text="@string/tituloeT"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/iVjuegoDetalle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iVjuegoDetalle"
+            android:layout_width="115dp"
+            android:layout_height="175dp"
+            android:elevation="11dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.179"
+            tools:ignore="ImageContrastCheck"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewJuego"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/gris"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline8">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tVgeneroDet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/genero"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.114"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.078" />
+
+                <TextView
+                    android:id="@+id/tVgeneroDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobo"
+                    android:text="@string/genero"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/tVgeneroDet"
+                    app:layout_constraintTop_toBottomOf="@+id/tVgeneroDet" />
+
+                <TextView
+                    android:id="@+id/tVanioDet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/anioLanz"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tVgeneroDetalle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.279" />
+
+                <TextView
+                    android:id="@+id/tVanioDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobo"
+                    android:text="@string/anio"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/tVanioDet"
+                    app:layout_constraintTop_toBottomOf="@+id/tVanioDet" />
+
+                <TextView
+                    android:id="@+id/tVdescrDet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/descr"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tVanioDetalle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.477" />
+
+                <TextView
+                    android:id="@+id/tVdescrDetalle"
+                    android:layout_width="0dp"
+                    android:layout_height="84dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:fadeScrollbars="false"
+                    android:fontFamily="@font/nunitobo"
+                    android:requiresFadingEdge="vertical"
+                    android:scrollbars="vertical"
+                    android:text="@string/descr"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tVdescrDet" />
+
+                <TextView
+                    android:id="@+id/tVtuValDet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/tuVal"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tVdescrDet"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.789" />
+
+                <RatingBar
+                    android:id="@+id/ratingBarValDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintStart_toStartOf="@+id/tVtuValDet"
+                    app:layout_constraintTop_toBottomOf="@+id/tVtuValDet"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/tVvalDet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/val"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.82"
+                    app:layout_constraintStart_toEndOf="@+id/tVgeneroDet"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.079" />
+
+                <TextView
+                    android:id="@+id/tVvalFb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobo"
+                    android:text="@string/val"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tVvalDet"
+                    app:layout_constraintTop_toBottomOf="@+id/tVvalDet" />
+
+                <Button
+                    android:id="@+id/buttonEnviar"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_color"
+                    android:fontFamily="@font/pretendo"
+                    android:text="@string/env"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.267"
+                    app:layout_constraintStart_toEndOf="@+id/ratingBarValDetalle"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.874" />
+
+                <TextView
+                    android:id="@+id/tVnumVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunitobl"
+                    android:text="@string/defVal"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ratingBarValDetalle"
+                    app:layout_constraintHorizontal_bias="0.888"
+                    app:layout_constraintStart_toEndOf="@+id/tVtuValDet"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.787" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="252dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

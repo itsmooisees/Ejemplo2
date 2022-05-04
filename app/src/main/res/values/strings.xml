@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Nintendo Network</string>
+
+
+    <!--- FRAGMENT INICIO SESION -->
+    <string name="bienvenido">¡Bienvenido a Nintendo Network!</string>
+    <string name="email">Correo electrónico</string>
+    <string name="pass">Contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="reg">¿Aún no te has registrado?</string>
+    <string name="crea">Crea una cuenta</string>
+    <string name="inicio">Se ha iniciado sesión correctamente</string>
+    <string name="datosInc">El email o la contraseña no son correctos</string>
+    <string name="espere">Por favor, espera…</string>
+
+
+    <!--- FRAGMENT CREAR CUENTA -->
+    <string name="crear">CREAR CUENTA</string>
+    <string name="user">Usuario</string>
+    <string name="conf">Confirma contraseña</string>
+    <string name="crearB">Crear</string>
+    <string name="checkBox">He leído y acepto los Términos de Uso y la Política de Privacidad</string>
+    <string name="creada">Tu cuenta se ha creado correctamente</string>
+    <string name="vacios">¡Tienes que introducir todos los campos!</string>
+    <string name="userVac">¡Tienes que introducir el usuario!</string>
+    <string name="emailNo">El formato del correo no es válido</string>
+    <string name="passDeb">La contraseña es muy corta</string>
+    <string name="passNo">Las contraseñas no coinciden</string>
+    <string name="existe">¡Ese correo ya está registrado!</string>
+
+
+    <!--- FRAGMENT FEED -->
+    <string name="feed">Feed</string>
+    <string name="plus">+</string>
+
+
+    <!--- FRAGMENT JUEGO -->
+    <string name="nuevo">NUEVO JUEGO</string>
+    <string name="titulo">Título del juego</string>
+    <string name="tituloeT">Título</string>
+    <string name="genero">Género</string>
+    <string name="anioLanz">Año de lanzamiento</string>
+    <string name="anio">Año</string>
+    <string name="descr">Descripción</string>
+    <string name="caratula">URL de la carátula</string>
+    <string name="url">URL</string>
+    <string name="fechaInc">La fecha introducida no es correcta</string>
+    <string name="noUrl">No has introducido una URL válida</string>
+    <string name="aniadido">Has añadido el juego correctamente</string>
+
+
+    <!--- FRAGMENT DETALLE -->
+    <string name="val">Valoración</string>
+    <string name="tuVal">Tu valoración</string>
+    <string name="defVal">0.0 / 5</string>
+    <string name="env">Enviar</string>
+    <string name="borra">Borrar</string>
+    <string name="tick">✓</string>
+    <string name="confirm">Confirmación</string>
+    <string name="seguro">Estás seguro de que quieres eliminar tu valoración del juego</string>
+    <string name="siVal">Sí</string>
+    <string name="noVal">No</string>
+    <string name="regVal">Tu valoración se ha registrado</string>
+    <string name="elimVal">Se ha eliminado tu valoración</string>
+
+
+    <!--- FRAGMENT USER -->
+    <string name="usuario">USUARIO</string>
+    <string name="info">Aquí puedes gestionar la información de tu cuenta, como el usuario y el correo electrónico.</string>
+    <string name="modificar">MODIFICAR</string>
+    <string name="eliminar">ELIMINAR</string>
+
+
+    <!--- FRAGMENT MODIFICA -->
+    <string name="modDatos">Aquí puedes modificar tus datos</string>
+    <string name="puntos">· · · · · · · ·</string>
+    <string name="userMod">Se ha modificado el usuario correctamente</string>
+    <string name="contraMod">La contraseña se ha modificado correctamente</string>
+    <string name="nada">¡No hay nada para modificar!</string>
+    <string name="errorContra">No se puede cambiar la contraseña en este momento</string>
+    <string name="errorUsu">El usuario no se puede modificar en este momento</string>
+
+
+    <!--- FRAGMENT ELIMINA -->
+    <string name="mensElim">¿Estás seguro de que quieres eliminar la cuenta? Esta acción no se puede deshacer y perderás el acceso a la aplicación.</string>
+    <string name="si">Sí, quiero eliminarla</string>
+    <string name="no">No, llévame a la feed</string>
+    <string name="selec">¡Tienes que seleccionar una opción!</string>
+    <string name="elimBien">La cuenta se ha eliminado correctamente</string>
+    <string name="cancel">Se ha cancelado la eliminación</string>
+    <string name="noElim">En este momento no se puede eliminar tu cuenta</string>
+</resources>
