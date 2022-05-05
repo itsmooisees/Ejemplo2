@@ -130,5 +130,13 @@
         tools:layout="@layout/fragment_detalle">
         <argument android:name="juego"
             app:argType="com.example.ejemplo2.Juego" />
+        <action
+            android:id="@+id/action_detalleFragment_to_feedFragment"
+            app:destination="@id/feedFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/feedFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -13,6 +13,7 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.ejemplo2.databinding.FragmentDetalleBinding
@@ -40,20 +41,10 @@ class DetalleFragment : Fragment() {
 
         pintaDetalles()
         valoracion()
-        eliminaJuego()
 
         return binding.root
     }
 
-
-    private fun eliminaJuego() {
-        if (args.juego.uploader == user?.email)
-            binding.iVpapelera.visibility = View.VISIBLE
-
-        binding.iVpapelera.setOnClickListener {
-            Toast.makeText(activity, "Me has pulsado!", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
     //Función que va a mostrar gráficamente todos los campos del objeto con su información, que es la gracia del fragment
@@ -93,6 +84,7 @@ class DetalleFragment : Fragment() {
     }
 
 
+
     //Método para controlar si un usuario ha valorado o no, y hacer una cosa u otra según su estado
     private fun valoracion() {
         var existe = false //Variable para controlar si un usuario ya ha valorado un juego. Hago un foreach que recorre todos los usuarios que han valorado, y si alguno coincide con el actual, esta variable cambia a true y no entra al if
@@ -111,6 +103,7 @@ class DetalleFragment : Fragment() {
                     dataSnapshot.children.forEach { child ->
                         //En caso de que coincida el titulo del juego que viene de los args, que es el que el usuario ha pulsado, con el título de cada hijo de la bbdd que se recorre, entraremos en el if, porque es el juego en cuestión
                         if (titulo == child.child("titulo").getValue<String>()) {
+                            eliminaJuego(child)
                             //Cada juego de la bbdd tiene dos campos, usuarios y valoracInd, que almacenan un string con todos los emails que han valorado un juego y las valoraciones que los usuarios han dado //Cada vez que un usuario valora, se introduce su correo en una posición y, en consecuencia, su valoración en la misma posición del otro campo
                             //En esas dos variables de abajo se almacenan ambos campos respectivamente y se splittean para así tener una lista de strings con cada email y cada valoración ordenado por su posición, de forma que luego podremos acceder con un índice a la valoración que ha dado el usuario x del foreach
                             val emails = args.juego.usuarios?.split(",")
@@ -135,7 +128,7 @@ class DetalleFragment : Fragment() {
 
                                         //onclicklistener por si el usuario vuelve a pinchar si ya ha valorado, para informarle de que ya ha valorado, y que así quede mejor que simplemente deshabilitando el botón y que no haga nada
                                         buttonEnviar.setOnClickListener {
-                                            confirmacion(titulo!!, emails, valoraciones, index, child, activity!!)
+                                            confirmacion(titulo!!, emails, valoraciones, index, child)
                                         }
                                     }
                                 }
@@ -189,6 +182,35 @@ class DetalleFragment : Fragment() {
     }
 
 
+
+    //Función para eliminar un juego de la bbdd. Solo lo puede eliminar el usuario que lo subió, y solo si lo han valorado menos de 3 personas (límite ampliable en el caso de que en un fututo haya muchos usuarios, osea nunca)
+    private fun eliminaJuego(child: DataSnapshot) {
+        if (args.juego.uploader == user?.email) {
+            binding.iVpapelera.visibility = View.VISIBLE
+
+            binding.iVpapelera.setOnClickListener { view ->
+                if (args.juego.personas!! > 3) {
+                    val alertDialog = AlertDialog.Builder(requireActivity())
+
+                    alertDialog.apply {
+                        setTitle(getString(R.string.error))
+
+                        setMessage(getString(R.string.noElimJue))
+
+                        setPositiveButton(getString(R.string.enten)) { _, _ -> }
+                    }.create().show()
+
+                } else {
+                    myRef.child(child.key!!).removeValue()
+                    Toast.makeText(activity, R.string.elimJue, Toast.LENGTH_SHORT).show()
+                    view.findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
+                }
+            }
+        }
+    }
+
+
+
     //Puede ser que exista una forma más simple de insertar en la bbdd sin tener que recurrir a un hashmap, pero de momento esto funciona perfectamente, si tengo tiempo lo miraré
     //Función para actualizar cambios en un hijo de la bbdd, ya sea para añadir o eliminar
     @SuppressLint("SetTextI18n")
@@ -211,8 +233,9 @@ class DetalleFragment : Fragment() {
     }
 
 
+
     //Función para confirmar si el usuario quiere eliminar la valoración y, en caso afirmativo, realizar dicha eliminación
-    private fun confirmacion(titulo: String, emails: List<String>, valoraciones: List<String>, index: Int, child: DataSnapshot, context: Context) {
+    private fun confirmacion(titulo: String, emails: List<String>, valoraciones: List<String>, index: Int, child: DataSnapshot) {
         //AQUÍ SI ME SOBRA TIEMPO al final, sería idóneo darle una vuelta al tema de lo de conjunto y personas, ya que aquí tengo las dos listas separadas y con el final quitado, asi que para conjunto sería tan fácil como crear otra lista con los valores de la actual convertidos a float,
         //y coger la lista de los emails y por casa email (foreach) sumar uno a un contador, de forma que en dos variables quedarían almacenados el conjunto y las personas, pero sin necesidad de andar guardándolo en la bbdd. Como digo REVISARLO SI VEO QUE TAL
 
@@ -220,7 +243,7 @@ class DetalleFragment : Fragment() {
         //La segunda lo organicé mejor pero empezó a petar cuando pinchaba en un juego así que aborté misión. Volveré a intentarlo si veo que tal xdxd
 
         //Creamos un alertdialog para que el usuario confirme si quiere o no eliminar el juego, para dar mayor seguridad y profundidad a la app
-        val alertDialog = AlertDialog.Builder(context)
+        val alertDialog = AlertDialog.Builder(requireActivity())
 
         //Tanto los emails como las valoraciones que nos vienen ya previamente separadas por comas vienen como List, con lo cual no son modificables y hay que convertirlas a mutableList para poder eliminar la valoración y el usuario en cuestión
         val mutableEmails = emails.toMutableList()

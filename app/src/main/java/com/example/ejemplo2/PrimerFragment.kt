@@ -37,6 +37,8 @@ class PrimerFragment : Fragment() {
         return binding.root
     }
 
+
+
     //Método para iniciar sesión en la bbdd y así poder acceder a la app
     private fun iniciaSesion() {
         binding.apply {

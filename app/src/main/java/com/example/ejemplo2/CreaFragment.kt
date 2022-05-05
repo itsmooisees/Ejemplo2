@@ -39,6 +39,7 @@ class CreaFragment : Fragment() {
     }
 
 
+
     //Método para crear una cuenta
     private fun crearCuenta() {
         binding.apply {
@@ -128,6 +129,8 @@ class CreaFragment : Fragment() {
             }
         }
     }
+
+
 
     //Función para el botón
     private fun activaBoton() {

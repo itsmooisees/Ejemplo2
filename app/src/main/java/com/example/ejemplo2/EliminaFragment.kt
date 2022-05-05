@@ -24,6 +24,8 @@ class EliminaFragment : Fragment() {
         return binding.root
     }
 
+
+
     //Método para eliminar un usuario de la aplicación
     private fun eliminacion() {
         val user = Firebase.auth.currentUser!! //Obtenemos el usuario que está logeado

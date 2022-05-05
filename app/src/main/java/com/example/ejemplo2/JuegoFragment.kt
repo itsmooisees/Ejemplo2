@@ -34,6 +34,8 @@ class JuegoFragment : Fragment() {
         return binding.root
     }
 
+
+
     //Método para recoger los datos de los campos e introducirlos en la bbdd si se cumplen las condiciones
     private fun recogeDatos(): Boolean {
         val myRef = database.getReference("juegos")

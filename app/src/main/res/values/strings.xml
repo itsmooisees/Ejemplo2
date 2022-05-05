@@ -63,6 +63,10 @@
     <string name="noVal">No</string>
     <string name="regVal">Tu valoración se ha registrado</string>
     <string name="elimVal">Se ha eliminado tu valoración</string>
+    <string name="error">Error</string>
+    <string name="noElimJue">No puedes eliminar el juego porque ya han valorado más de 3 personas. Ponte en contacto con el administrador.</string>
+    <string name="enten">Entendido</string>
+    <string name="elimJue">Se ha eliminado el juego correctamente</string>
 
 
     <!--- FRAGMENT USER -->

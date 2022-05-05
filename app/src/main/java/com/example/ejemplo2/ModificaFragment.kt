@@ -25,6 +25,8 @@ class ModificaFragment : Fragment() {
         return binding.root
     }
 
+
+
     //Método para modificar el nombre y la contraseña de un usuario en la bbdd
     private fun modificacion() {
         val user = Firebase.auth.currentUser //Obtenemos el usuario actual
