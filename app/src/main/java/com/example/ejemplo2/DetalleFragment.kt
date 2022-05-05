@@ -97,13 +97,13 @@ class DetalleFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Si el usuario no ha valorado entrará aquí. Una vez que valore, ya no pasará por aquí y el ondatachange no actualizará nada
                 if (!valorado) {
-                    val titulo = args.juego.titulo
+                    val titulo = args.juego.titulo!!
 
                     //Para cada hijo que haya en el datasnapshot
                     dataSnapshot.children.forEach { child ->
                         //En caso de que coincida el titulo del juego que viene de los args, que es el que el usuario ha pulsado, con el título de cada hijo de la bbdd que se recorre, entraremos en el if, porque es el juego en cuestión
                         if (titulo == child.child("titulo").getValue<String>()) {
-                            eliminaJuego(child)
+                            eliminaJuego(titulo, child)
                             //Cada juego de la bbdd tiene dos campos, usuarios y valoracInd, que almacenan un string con todos los emails que han valorado un juego y las valoraciones que los usuarios han dado //Cada vez que un usuario valora, se introduce su correo en una posición y, en consecuencia, su valoración en la misma posición del otro campo
                             //En esas dos variables de abajo se almacenan ambos campos respectivamente y se splittean para así tener una lista de strings con cada email y cada valoración ordenado por su posición, de forma que luego podremos acceder con un índice a la valoración que ha dado el usuario x del foreach
                             val emails = args.juego.usuarios?.split(",")
@@ -128,7 +128,7 @@ class DetalleFragment : Fragment() {
 
                                         //onclicklistener por si el usuario vuelve a pinchar si ya ha valorado, para informarle de que ya ha valorado, y que así quede mejor que simplemente deshabilitando el botón y que no haga nada
                                         buttonEnviar.setOnClickListener {
-                                            confirmacion(titulo!!, emails, valoraciones, index, child)
+                                            confirmacion(titulo, emails, valoraciones, index, child)
                                         }
                                     }
                                 }
@@ -184,26 +184,43 @@ class DetalleFragment : Fragment() {
 
 
     //Función para eliminar un juego de la bbdd. Solo lo puede eliminar el usuario que lo subió, y solo si lo han valorado menos de 3 personas (límite ampliable en el caso de que en un fututo haya muchos usuarios, osea nunca)
-    private fun eliminaJuego(child: DataSnapshot) {
+    private fun eliminaJuego(titulo: String, child: DataSnapshot) {
+        //Lo primero que hacemos es comprobar si el email que viene de los argumentos, que es el del usuario que lo ha subido, coincide con el email del usuario actual.
+        //En caso de que coincida, será que es el usuario que lo ha subido, con lo cual mostraremos la visibilidad del botón para que el usuario pueda interactualr con él y borrar o no el juego. Si no coincide, no cambiará nada, con lo cual el botón seguirá oculto
         if (args.juego.uploader == user?.email) {
-            binding.iVpapelera.visibility = View.VISIBLE
+            binding.iVpapelera.visibility = View.VISIBLE //Lo setteamos a visible
 
-            binding.iVpapelera.setOnClickListener { view ->
-                if (args.juego.personas!! > 3) {
+            binding.iVpapelera.setOnClickListener { view -> //Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla
+                if (args.juego.personas!! > 3) { //En caso de que el número de personas que ha votado sea mayor a 3, el usuario no podrá eliminar el juego, ya que considero que han votado suficientes personas como para borrar sus valoraciones
+                    val alertDialog = AlertDialog.Builder(requireActivity()) //Creamos un alertdialog para informar al usuario
+
+                    alertDialog.apply {
+                        setTitle(getString(R.string.error)) //Le ponemos un título de error
+
+                        setMessage(getString(R.string.noElimJue)) //Mostramos un mensaje para informar al usuario de por qué no se borra el juego
+
+                        setPositiveButton(getString(R.string.enten)) { _, _ -> } //Añadimos un botón para que el usuario simplemente lo pulse para cerrar el alertdialog, aunque también puede pulsar fuera del diálogo y tendrá el mismo efecto. No hace nada, simplemente cerrar
+                    }.create().show()
+
+                } else { //Si hay 3 personas o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
                     val alertDialog = AlertDialog.Builder(requireActivity())
 
                     alertDialog.apply {
-                        setTitle(getString(R.string.error))
+                        setTitle((getString(R.string.confirm)))
 
-                        setMessage(getString(R.string.noElimJue))
+                        setMessage(getString(R.string.seguroJue) + " $titulo" + getString(R.string.seguroJue2))
 
-                        setPositiveButton(getString(R.string.enten)) { _, _ -> }
+                        setPositiveButton(getString(R.string.siVal)) { _, _ ->
+                            myRef.child(child.key!!).removeValue()
+                            Toast.makeText(activity, R.string.elimJue, Toast.LENGTH_SHORT).show()
+                            view.findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
+                        }
+
+                        setNegativeButton(getString(R.string.noVal)) { _, _ ->
+                            Toast.makeText(activity, R.string.cancel, Toast.LENGTH_SHORT).show()
+                        }
                     }.create().show()
 
-                } else {
-                    myRef.child(child.key!!).removeValue()
-                    Toast.makeText(activity, R.string.elimJue, Toast.LENGTH_SHORT).show()
-                    view.findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
                 }
             }
         }
