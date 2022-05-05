@@ -217,6 +217,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/papelera"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/cardViewJuego"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.759"

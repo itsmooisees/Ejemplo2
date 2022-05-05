@@ -27,10 +27,10 @@ class FeedFragment : Fragment() {
     private lateinit var messagesListener: ValueEventListener
     private val juegosList: MutableList<Juego> = ArrayList() //Creamos una MutableList (ArrayList) para guardar todos los juegos que haya
     private var titulosFb = "" //Variable para guardar la concatenación de títulos
+    private val user = Firebase.auth.currentUser
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
-        val user = Firebase.auth.currentUser
 
         creaRecyclerView()
 
@@ -77,7 +77,8 @@ class FeedFragment : Fragment() {
                         child.child("personas").getValue<Int>(),
                         child.child("foto").getValue<String>(),
                         child.child("usuarios").getValue<String>(),
-                        child.child("valoracInd").getValue<String>())
+                        child.child("valoracInd").getValue<String>(),
+                        child.child("uploader").getValue<String>())
 
                     //Añadimos ese objeto a la MutableList
                     juegosList.add(juego)

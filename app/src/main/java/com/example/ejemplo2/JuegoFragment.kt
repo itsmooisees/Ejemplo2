@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ejemplo2.databinding.FragmentJuegoBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -47,7 +48,7 @@ class JuegoFragment : Fragment() {
             val foto = eTurl.text.toString()
             var existe = false //Variable para comprobar si ya existe un juego en la bbdd
 
-            ////Recorremos cada título que hay en la lista
+            //Recorremos cada título que hay en la lista
             titulosFb.forEach { tit ->
                 //Comparamos dicho título con el título que el usuario ha escrito en el et. Lo ponemos to en minúsculas y eliminamos los espacios de ambos strings, para así compararlos de manera más fiable
                 //En caso de que el usuario escriba el mismo nombre pero varíe alguna letra, ahí ya este if no lo va a detectar y va a dejar meter el juego, pero claro, a ver qué hago. No puedo detectar los infinitos cambios que se le pueden hacer a un título :v
@@ -85,7 +86,9 @@ class JuegoFragment : Fragment() {
 
                 //Cuando no haya pasado nada de lo anterior, será que to esta correcto y pasará por aquí para crear un objeto juego e introducirlo
                 else -> {
-                    val juego = Juego(titulo, genero, anio.toInt(), descr, 0f, 0, foto, "", "")
+                    val user = Firebase.auth.currentUser
+
+                    val juego = Juego(titulo, genero, anio.toInt(), descr, 0f, 0, foto, "", "", user?.email)
                     myRef.child(myRef.push().key.toString()).setValue(juego) //Obtenemos un hijo y le metemos una key ¿generada automáticamente? y los datos correspondientes
 
                     //Informamos de que se ha añadido bien

@@ -33,14 +33,26 @@ class DetalleFragment : Fragment() {
     private val myRef = database.getReference("juegos") //Obtenemos la referencia de la tabla indicada
     private lateinit var messagesListener: ValueEventListener
     private var valorado = false //Variable un poco random para controlar si ya se ha valorado o no y parar el ondatachange ese, para que cuando el usuario cambie algo, las entradas no se actualicen infinitamente, se rallaba la bbdd
+    private val user = Firebase.auth.currentUser
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detalle, container, false)
 
         pintaDetalles()
         valoracion()
+        eliminaJuego()
 
         return binding.root
+    }
+
+
+    private fun eliminaJuego() {
+        if (args.juego.uploader == user?.email)
+            binding.iVpapelera.visibility = View.VISIBLE
+
+        binding.iVpapelera.setOnClickListener {
+            Toast.makeText(activity, "Me has pulsado!", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -203,6 +215,9 @@ class DetalleFragment : Fragment() {
     private fun confirmacion(titulo: String, emails: List<String>, valoraciones: List<String>, index: Int, child: DataSnapshot, context: Context) {
         //AQUÍ SI ME SOBRA TIEMPO al final, sería idóneo darle una vuelta al tema de lo de conjunto y personas, ya que aquí tengo las dos listas separadas y con el final quitado, asi que para conjunto sería tan fácil como crear otra lista con los valores de la actual convertidos a float,
         //y coger la lista de los emails y por casa email (foreach) sumar uno a un contador, de forma que en dos variables quedarían almacenados el conjunto y las personas, pero sin necesidad de andar guardándolo en la bbdd. Como digo REVISARLO SI VEO QUE TAL
+
+        //Probado lo de arriba ya dos veces y sigo sin sacarlo xdd, la primera me faltó organización sobre cómo lo iba a hacer y pasaban cosas como lo del NaN y otras
+        //La segunda lo organicé mejor pero empezó a petar cuando pinchaba en un juego así que aborté misión. Volveré a intentarlo si veo que tal xdxd
 
         //Creamos un alertdialog para que el usuario confirme si quiere o no eliminar el juego, para dar mayor seguridad y profundidad a la app
         val alertDialog = AlertDialog.Builder(context)
