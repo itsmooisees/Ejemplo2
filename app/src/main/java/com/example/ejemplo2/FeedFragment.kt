@@ -53,8 +53,9 @@ class FeedFragment : Fragment() {
     }
 
 
-
-    //Mediante esta función vamos a generar el recyclerView
+    /**
+     * Función mediante la cual vamos a generar el recyclerview con todos los juegos existentes
+     */
     private fun creaRecyclerView() {
         binding.juegosRecyclerView.layoutManager = LinearLayoutManager(activity) //Cogemos el recyclerView de la vista y le asignamos el tipo de layout que va a utilizar para mostrar los items
         //Con un linearLayout, se irán mostrando linealmente los items de uno en uno. Se pueden utilizar otros layouts para mostrarlos en grupo de dos, tres...

@@ -13,7 +13,10 @@ class JuegosViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val binding = ItemJuegoBinding.bind(view)
 
-    //Con esta función que recibe un objeto juego pasado desde el adapter como item, le asignamos a los tv cada atributo del objeto, y usamos glide para pintar la foto convirtiendo el string de la url
+
+    /**
+     * Con esta función que recibe un objeto juego pasado desde el adapter como item, le asignamos a los tv cada atributo del objeto, y usamos glide para pintar la foto convirtiendo el string de la url
+     */
     fun pinta(juego: Juego) {
         binding.apply {
             tVtituloJuego.text = juego.titulo

@@ -39,8 +39,9 @@ class CreaFragment : Fragment() {
     }
 
 
-
-    //Método para crear una cuenta
+    /**
+     * Método para crear una cuenta con los datos que ha introducido el usuario, en caso de que to esté en orden
+     */
     private fun crearCuenta() {
         binding.apply {
             //Ponemos un listener al botón para que haga la lógica cuando lo pulsamos
@@ -131,8 +132,9 @@ class CreaFragment : Fragment() {
     }
 
 
-
-    //Función para el botón
+    /**
+     * Función para activar o descativar el botón
+     */
     private fun activaBoton() {
         binding.apply {
             //Listener para habilitar o deshabilitar el botón crear en función de si está marcado o no el checkbox

@@ -35,8 +35,9 @@ class JuegoFragment : Fragment() {
     }
 
 
-
-    //Método para recoger los datos de los campos e introducirlos en la bbdd si se cumplen las condiciones
+    /**
+     * Método para recoger los datos de los campos e introducirlos en la bbdd si se cumplen las condiciones
+     */
     private fun recogeDatos(): Boolean {
         val myRef = database.getReference("juegos")
         val titulosFb = args.titulosFb.split(",") //Recogemos el string que hemos pasado por los args, que contiene todos los titulos recogidos en la feed, y lo splitteamos por comas de forma que se nos cree una lista de strings con cada título individual

@@ -38,8 +38,9 @@ class PrimerFragment : Fragment() {
     }
 
 
-
-    //Método para iniciar sesión en la bbdd y así poder acceder a la app
+    /**
+     * Método para comprobar los datos del inicio de sesión y, en caso de ser correctos, permitir al usuario acceder a la app
+     */
     private fun iniciaSesion() {
         binding.apply {
             //Al pulsar el botón

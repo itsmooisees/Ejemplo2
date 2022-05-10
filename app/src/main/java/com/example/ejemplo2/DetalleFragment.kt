@@ -46,8 +46,9 @@ class DetalleFragment : Fragment() {
     }
 
 
-
-    //Función que va a mostrar gráficamente todos los campos del objeto con su información, que es la gracia del fragment
+    /**
+     * Función que va a mostrar gráficamente todos los campos del objeto con su información, que es la gracia del fragment
+     */
     @SuppressLint("SetTextI18n")
     private fun pintaDetalles() {
 
@@ -84,8 +85,9 @@ class DetalleFragment : Fragment() {
     }
 
 
-
-    //Método para controlar si un usuario ha valorado o no, y hacer una cosa u otra según su estado
+    /**
+     * Método para controlar si un usuario ha valorado o no, y hacer una cosa u otra según su estado
+     */
     private fun valoracion() {
         var existe = false //Variable para controlar si un usuario ya ha valorado un juego. Hago un foreach que recorre todos los usuarios que han valorado, y si alguno coincide con el actual, esta variable cambia a true y no entra al if
         val user = Firebase.auth.currentUser //Obtenemos el usuario actual
@@ -182,8 +184,9 @@ class DetalleFragment : Fragment() {
     }
 
 
-
-    //Función para eliminar un juego de la bbdd. Solo lo puede eliminar el usuario que lo subió, y solo si lo han valorado menos de 3 personas (límite ampliable en el caso de que en un fututo haya muchos usuarios, osea nunca)
+    /**
+     * Función para eliminar un juego de la bbdd. Solo lo puede eliminar el usuario que lo subió, y solo si lo han valorado menos de 3 personas (límite ampliable en el caso de que en un futuro haya muchos usuarios, osea nunca)
+     */
     private fun eliminaJuego(titulo: String, child: DataSnapshot) {
         //Lo primero que hacemos es comprobar si el email que viene de los argumentos, que es el del usuario que lo ha subido, coincide con el email del usuario actual.
         //En caso de que coincida, será que es el usuario que lo ha subido, con lo cual mostraremos la visibilidad del botón para que el usuario pueda interactualr con él y borrar o no el juego. Si no coincide, no cambiará nada, con lo cual el botón seguirá oculto
@@ -191,8 +194,9 @@ class DetalleFragment : Fragment() {
             binding.iVpapelera.visibility = View.VISIBLE //Lo setteamos a visible
 
             binding.iVpapelera.setOnClickListener { view -> //Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla
+                val alertDialog = AlertDialog.Builder(requireActivity()) //Creamos un alertdialog para informar al usuario
+
                 if (args.juego.personas!! > 3) { //En caso de que el número de personas que ha votado sea mayor a 3, el usuario no podrá eliminar el juego, ya que considero que han votado suficientes personas como para borrar sus valoraciones
-                    val alertDialog = AlertDialog.Builder(requireActivity()) //Creamos un alertdialog para informar al usuario
 
                     alertDialog.apply {
                         setTitle(getString(R.string.error)) //Le ponemos un título de error
@@ -203,7 +207,6 @@ class DetalleFragment : Fragment() {
                     }.create().show()
 
                 } else { //Si hay 3 personas o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
-                    val alertDialog = AlertDialog.Builder(requireActivity())
 
                     alertDialog.apply {
                         setTitle((getString(R.string.confirm)))
@@ -227,9 +230,10 @@ class DetalleFragment : Fragment() {
     }
 
 
-
-    //Puede ser que exista una forma más simple de insertar en la bbdd sin tener que recurrir a un hashmap, pero de momento esto funciona perfectamente, si tengo tiempo lo miraré
-    //Función para actualizar cambios en un hijo de la bbdd, ya sea para añadir o eliminar
+    /**
+     * Función para actualizar cambios en un hijo de la bbdd, ya sea para añadir o eliminar
+     * Puede ser que exista una forma más simple de insertar en la bbdd sin tener que recurrir a un hashmap, pero de momento esto funciona perfectamente, si tengo tiempo lo miraré
+     */
     @SuppressLint("SetTextI18n")
     private fun actualiza(conjunto: Float, personas: Int, usuarios: String, valoracs: String, child: DataSnapshot) {
         //Creamos un hashmap para guardar los pares clave valor que van a ser actualizados en la bbdd
@@ -250,8 +254,9 @@ class DetalleFragment : Fragment() {
     }
 
 
-
-    //Función para confirmar si el usuario quiere eliminar la valoración y, en caso afirmativo, realizar dicha eliminación
+    /**
+     * Función para confirmar si el usuario quiere eliminar la valoración y, en caso afirmativo, realizar dicha eliminación
+     */
     private fun confirmacion(titulo: String, emails: List<String>, valoraciones: List<String>, index: Int, child: DataSnapshot) {
         //AQUÍ SI ME SOBRA TIEMPO al final, sería idóneo darle una vuelta al tema de lo de conjunto y personas, ya que aquí tengo las dos listas separadas y con el final quitado, asi que para conjunto sería tan fácil como crear otra lista con los valores de la actual convertidos a float,
         //y coger la lista de los emails y por casa email (foreach) sumar uno a un contador, de forma que en dos variables quedarían almacenados el conjunto y las personas, pero sin necesidad de andar guardándolo en la bbdd. Como digo REVISARLO SI VEO QUE TAL
