@@ -79,7 +79,7 @@ class DetalleFragment : Fragment() {
             }
 
             //Aplicamos la imagen con el string que viene de args
-            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.carga).error(R.drawable.error)).into(iVjuegoDetalle)
+            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.ic_broken_image)).into(iVjuegoDetalle)
             //OJO PARA MOSTRAR U OCULTAR ALGO: setVisibility(View.GONE/VISIBLE)
         }
     }
