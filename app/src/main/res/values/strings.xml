@@ -59,7 +59,7 @@
     <string name="tick">✓</string>
     <string name="confirm">Confirmación</string>
     <string name="seguro">Estás seguro de que quieres eliminar tu valoración del juego</string>
-    <string name="seguroJue">Vas a eliminar el juego </string>
+    <string name="seguroJue">Vas a eliminar el juego</string>
     <string name="seguroJue2">. Se perderán todos sus datos y las valoraciones registradas hasta el momento. ¿Quieres continuar?</string>
     <string name="siVal">Sí</string>
     <string name="noVal">No</string>

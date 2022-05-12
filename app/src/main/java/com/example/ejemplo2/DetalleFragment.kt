@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.ejemplo2.databinding.FragmentDetalleBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -33,7 +34,7 @@ class DetalleFragment : Fragment() {
     private val myRef = database.getReference("juegos") //Obtenemos la referencia de la tabla indicada
     private lateinit var messagesListener: ValueEventListener
     private var valorado = false //Variable un poco random para controlar si ya se ha valorado o no y parar el ondatachange ese, para que cuando el usuario cambie algo, las entradas no se actualicen infinitamente, se rallaba la bbdd
-    private val user = Firebase.auth.currentUser
+    private val user = Firebase.auth.currentUser //Obtenemos el usuario actual
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detalle, container, false)
@@ -78,7 +79,7 @@ class DetalleFragment : Fragment() {
             }
 
             //Aplicamos la imagen con el string que viene de args
-            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).into(iVjuegoDetalle)
+            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.carga).error(R.drawable.error)).into(iVjuegoDetalle)
             //OJO PARA MOSTRAR U OCULTAR ALGO: setVisibility(View.GONE/VISIBLE)
         }
     }
@@ -89,7 +90,6 @@ class DetalleFragment : Fragment() {
      */
     private fun valoracion() {
         var existe = false //Variable para controlar si un usuario ya ha valorado un juego. Hago un foreach que recorre todos los usuarios que han valorado, y si alguno coincide con el actual, esta variable cambia a true y no entra al if
-        val user = Firebase.auth.currentUser //Obtenemos el usuario actual
 
         //No sé exactamente si es necesario un onDataChange para obtener un datasnapshot, porque yo lo que quiero es obtener dicho datasnapshot para poder recorrer sus hijos
         //Entonces no sé si hay otro método que me dé este datasnapshot o ni siquiera sé si esta es la mejor forma de hacer lo que quier hacer, pero es la que sé y la cosa es que funciona xd
@@ -107,14 +107,14 @@ class DetalleFragment : Fragment() {
                             eliminaJuego(titulo, child)
                             //Cada juego de la bbdd tiene dos campos, usuarios y valoracInd, que almacenan un string con todos los emails que han valorado un juego y las valoraciones que los usuarios han dado //Cada vez que un usuario valora, se introduce su correo en una posición y, en consecuencia, su valoración en la misma posición del otro campo
                             //En esas dos variables de abajo se almacenan ambos campos respectivamente y se splittean para así tener una lista de strings con cada email y cada valoración ordenado por su posición, de forma que luego podremos acceder con un índice a la valoración que ha dado el usuario x del foreach
-                            val emails = args.juego.usuarios?.split(",")
-                            val valoraciones = args.juego.valoracInd?.split(",")
+                            val emails = args.juego.usuarios!!.split(",")
+                            val valoraciones = args.juego.valoracInd!!.split(",")
 
                             var indice = 0 //Índice para acceder a la posición de valoraciones que le corresponda al email
 
                             //Para cada email que haya en la lista de emails del hijo
                             //Sería conveniente saber otra manera de recorrer todos los emails hasta que encuentre uno que coincida. Cuando coincida ya no recorrer más la lista ya que no va a volver a haber otra coincidencia, con lo cual es innecesario y un gasto de recursos.
-                            emails?.forEach { email ->
+                            emails.forEach { email ->
 
                                 //Si el email actual del foreach coincide con el email del usuario actual que está usando la app, entonces querrá decir que el usuario ya ha valorado, con lo cual no podemos dejarla volver a valorar
                                 if (email == user?.email) {
@@ -123,7 +123,7 @@ class DetalleFragment : Fragment() {
 
                                     binding.apply {
                                         ratingBarValDetalle.setIsIndicator(true) //Ponemos la ratingbar como indicator para que el usuario no pueda tocarla, ya que es simplemente visual en este caso para mostrar visualmente la valoración que dio en su momento el usuario
-                                        ratingBarValDetalle.rating = valoraciones!![index].toFloat() //Establecemos la valoración en la ratingbar, cogiéndola de la lista de valoraciones, por el índice que se ha ido incrementando a medida que iba buscando el email del usuario, y convirtiéndolo a float para poder asignarlo a la ratingbar
+                                        ratingBarValDetalle.rating = valoraciones[index].toFloat() //Establecemos la valoración en la ratingbar, cogiéndola de la lista de valoraciones, por el índice que se ha ido incrementando a medida que iba buscando el email del usuario, y convirtiéndolo a float para poder asignarlo a la ratingbar
 
                                         buttonEnviar.text = activity?.getString(R.string.borra) //Setteamos el texto del botón a borrar, ya que existe la valoración y la función que hará entonces el botón será la de borrarla (tengo que poner lo de activity? porque si no había veces que petaba la app al hacer el getstring ns pq xd)
 
