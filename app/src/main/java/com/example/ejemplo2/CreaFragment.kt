@@ -159,7 +159,7 @@ class CreaFragment : Fragment() {
 
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(p0: View) {
-                Toast.makeText(activity, "HAS CLICADO", Toast.LENGTH_SHORT).show()
+                p0.findNavController().navigate(R.id.action_creaFragment_to_termsFragment)
             }
         }
 

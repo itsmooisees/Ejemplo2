@@ -29,6 +29,11 @@
     <string name="existe">¡Ese correo ya está registrado!</string>
 
 
+    <!--- FRAGMENT TERMINOS -->
+    <string name="terms">TERMINOS</string>
+    <string name="textTerms">Al registrarte y utilizar la aplicación aceptas los siguientes términos del servicio:\n\n1.- El tratamiento de los datos de inicio de sesión es seguro, de forma que el desarrollador no tiene la capacidad de ver o administrar las contraseñas de los usuarios.\n\n2.- El desarrollador se reserva el derecho de suspender las cuentas de aquellos usuarios que hagan un uso indebido de la aplicación, como la inclusión de imágenes que no correspondan o textos con contenido ofensivo.\n\n3.- Es posible que se guarde la información sobre la dirección IP para poder aplicar las restricciones a los usuarios e impedir la creación de cuentas nuevas.\n\n4.- No copyright infringement intended. All rights are reserved to the original owners, Nintendo and the other trademarks that may appear in-app.</string>
+
+
     <!--- FRAGMENT FEED -->
     <string name="feed">Feed</string>
     <string name="plus">+</string>
