@@ -93,42 +93,42 @@ class CreaFragment : Fragment() {
 
                     //Si no ha ocurrido nada de lo anterior, to estará en orden y se puede proceder a insertarlo en la bd
                     else -> {
-                            //Avisamos de que tiene que esperar un poco para que cargue la info y deshabilitamos el botón para que no pueda volver a darle mientras se procesa y así no pueda petar la aplicación
-                            //Porque si no deshabilito el botón y el usuario vuelve a pulsar mientras está cargando, la aplicación mete tremenda reventada
-                            Toast.makeText(activity, R.string.espere, Toast.LENGTH_SHORT).show()
-                            buttonCrear.isEnabled = false
+                        //Avisamos de que tiene que esperar un poco para que cargue la info y deshabilitamos el botón para que no pueda volver a darle mientras se procesa y así no pueda petar la aplicación
+                        //Porque si no deshabilito el botón y el usuario vuelve a pulsar mientras está cargando, la aplicación mete tremenda reventada
+                        Toast.makeText(activity, R.string.espere, Toast.LENGTH_SHORT).show()
+                        buttonCrear.isEnabled = false
 
-                            //Llamamos al método de auth para crear una cuenta
-                            auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) { task ->
-                                //En caso de que la tarea sea exitosa, quiere decir que se ha registrado correctamente. Entonces, procederemos a guardar el nombre del usuario
-                                if (task.isSuccessful) {
+                        //Llamamos al método de auth para crear una cuenta
+                        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) { task ->
+                            //En caso de que la tarea sea exitosa, quiere decir que se ha registrado correctamente. Entonces, procederemos a guardar el nombre del usuario
+                            if (task.isSuccessful) {
                                     //Obtenemos el usuario actual, que es el recién creado y que no tiene el nombre del usuario metido
-                                    val user = Firebase.auth.currentUser
+                                    val user = Firebase.auth.currentUser!!
 
-                                    //Hacemos un userprofile... en el cual setteamos el displayName con lo que el usuario ha escrito en el edittext
-                                    val profileUpdates = userProfileChangeRequest {
-                                        displayName = usu
-                                    }
-
-                                    //Llamamos al método updateProfile para meter el usuario
-                                    user!!.updateProfile(profileUpdates).addOnCompleteListener { task ->
-                                        //En caso de que la tarea sea exitosa, informamos de que to está correcto y avanzamos al feed
-                                        if (task.isSuccessful) {
-                                            Toast.makeText(activity, R.string.creada, Toast.LENGTH_SHORT).show()
-                                            view.findNavController().navigate(R.id.action_creaFragment_to_feedFragment)
-                                        } else {
-                                            //Este else se supone que es por si falla algo con el usuario, para volver a habilitar el botón, pero no sé que puede fallar
-                                            //Abajo sí tiene sentido, ya que puede fallar al crear el correo como explico en el comentario, ero aquí no sé cómo puede fallar (estaría bien COMPROBAR)
-                                            buttonCrear.isEnabled = true
-                                        }
-                                    }
-
-                                } else {
-                                    //En caso de que no se pueda crear el correo se informará de que ya existe y se volverá a habilitar el botón de crear para que el usuario pueda volver a crear
-                                    buttonCrear.isEnabled = true
-                                    Toast.makeText(activity, R.string.existe, Toast.LENGTH_SHORT).show()
+                                //Hacemos un userprofile... en el cual setteamos el displayName con lo que el usuario ha escrito en el edittext
+                                val profileUpdates = userProfileChangeRequest {
+                                    displayName = usu
                                 }
+
+                                //Llamamos al método updateProfile para meter el usuario
+                                user.updateProfile(profileUpdates).addOnCompleteListener { task ->
+                                    //En caso de que la tarea sea exitosa, informamos de que to está correcto y avanzamos al feed
+                                    if (task.isSuccessful) {
+                                        Toast.makeText(activity, R.string.creada, Toast.LENGTH_SHORT).show()
+                                        view.findNavController().navigate(R.id.action_creaFragment_to_feedFragment)
+                                    } else {
+                                        //Este else se supone que es por si falla algo con el usuario, para volver a habilitar el botón, pero no sé que puede fallar
+                                        //Abajo sí tiene sentido, ya que puede fallar al crear el correo como explico en el comentario, ero aquí no sé cómo puede fallar (estaría bien COMPROBAR)
+                                        buttonCrear.isEnabled = true
+                                    }
+                                }
+
+                            } else {
+                                //En caso de que no se pueda crear el correo se informará de que ya existe y se volverá a habilitar el botón de crear para que el usuario pueda volver a crear
+                                buttonCrear.isEnabled = true
+                                Toast.makeText(activity, R.string.existe, Toast.LENGTH_SHORT).show()
                             }
+                        }
 
                     }
                 }
