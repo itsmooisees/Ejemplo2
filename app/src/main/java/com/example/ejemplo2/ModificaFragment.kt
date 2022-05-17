@@ -30,10 +30,10 @@ class ModificaFragment : Fragment() {
      * Método para modificar el usuario y la contraseña del usuario actual en la bbdd
      */
     private fun modificacion() {
-        val user = Firebase.auth.currentUser //Obtenemos el usuario actual
+        val user = Firebase.auth.currentUser!! //Obtenemos el usuario actual
 
         binding.apply {
-            eTuserMod.hint = user?.displayName //Establecemos como hint del primer et el usuario actual, para que quede mejor y recuerde cuál es su usuario
+            eTuserMod.hint = user.displayName //Establecemos como hint del primer et el usuario actual, para que quede mejor y recuerde cuál es su usuario
             //También se le settea un hint a los et de la contraseña, pero lo hago en los attributes del xml
 
             //Cuando pulsamos el botón
@@ -57,7 +57,7 @@ class ModificaFragment : Fragment() {
                     }
 
                     //Y llamamos a updateprofile para que cambie el usuario
-                    user?.updateProfile(profileUpdates)?.addOnCompleteListener { task ->
+                    user.updateProfile(profileUpdates).addOnCompleteListener { task ->
                             if (task.isSuccessful)
                                 //Si la tarea se hace bien, que se supone que es siempre, simplemente informamos al usuario y se habrá actualizado correctamente el usuario
                                 Toast.makeText(activity, R.string.userMod, Toast.LENGTH_SHORT).show()
@@ -90,7 +90,7 @@ class ModificaFragment : Fragment() {
                         //Si no pasa nada de lo anterior, será que la contraseña cumple con el patrón y coincide con la confirmación, y podremos actualizarla
                         else -> {
                             //Llamamos a updatepassword pasándole la contraseña
-                            user!!.updatePassword(contraMod).addOnCompleteListener { task ->
+                            user.updatePassword(contraMod).addOnCompleteListener { task ->
                                     if (task.isSuccessful)
                                         //Si la tarea es exitosa, informamos de que se ha modificado bien
                                         Toast.makeText(activity, R.string.contraMod, Toast.LENGTH_SHORT).show()

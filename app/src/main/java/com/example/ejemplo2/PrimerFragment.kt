@@ -62,19 +62,18 @@ class PrimerFragment : Fragment() {
                         buttonEntrar.isEnabled = false
 
                         //Si ambos están rellenos, llamamos al auth pasándole los parámetros para que inicie la sesión
-                        activity?.let {
-                            auth.signInWithEmailAndPassword(email, contra).addOnCompleteListener(it) { task ->
-                                    if (task.isSuccessful) {
-                                        //En caso de que se haya iniciado sesión correctamente porque las credenciales son correctas, informamos y avanzamos al feed
-                                        Toast.makeText(activity, R.string.inicio, Toast.LENGTH_SHORT).show()
-                                        view.findNavController().navigate(R.id.action_primerFragment_to_feedFragment)
-                                    } else {
-                                        //En caso de que la tarea haya fallado, informamos de que hay algo mal y volvemos a activar el botón
-                                        buttonEntrar.isEnabled = true
-                                        Toast.makeText(activity, R.string.datosInc, Toast.LENGTH_SHORT).show()
-                                    }
-                                }
+                        auth.signInWithEmailAndPassword(email, contra).addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                //En caso de que se haya iniciado sesión correctamente porque las credenciales son correctas, informamos y avanzamos al feed
+                                Toast.makeText(activity, R.string.inicio, Toast.LENGTH_SHORT).show()
+                                view.findNavController().navigate(R.id.action_primerFragment_to_feedFragment)
+                            } else {
+                                //En caso de que la tarea haya fallado, informamos de que hay algo mal y volvemos a activar el botón
+                                buttonEntrar.isEnabled = true
+                                Toast.makeText(activity, R.string.datosInc, Toast.LENGTH_SHORT).show()
+                            }
                         }
+
                     }
                 }
             }

@@ -22,12 +22,15 @@ import com.google.firebase.ktx.Firebase
 class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
+
     private val database = Firebase.database //Obtenemos la instancia de la bbdd del proyecto actual
     private val myRef = database.getReference("juegos") //Obtenemos la referencia de la tabla indicada
     private lateinit var messagesListener: ValueEventListener
+    private val user = Firebase.auth.currentUser!!
+
     private val juegosList: MutableList<Juego> = ArrayList() //Creamos una MutableList (ArrayList) para guardar todos los juegos que haya
     private var titulosFb = "" //Variable para guardar la concatenación de títulos
-    private val user = Firebase.auth.currentUser
+    private var currentTit= "" //Variable para ir recogiendo cada título del foreach
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
@@ -35,7 +38,7 @@ class FeedFragment : Fragment() {
         creaRecyclerView()
 
         binding.apply {
-            buttonUsuario.text = user?.displayName //Setteamos en el botón el nombre del usuario
+            buttonUsuario.text = user.displayName //Setteamos en el botón el nombre del usuario
 
             //onclicklistener para pasar de la feed al fragment de nuevo juego
             buttonJuego.setOnClickListener { view: View ->
@@ -68,7 +71,7 @@ class FeedFragment : Fragment() {
                 juegosList.clear()
                 //Hacemos un foreach para cada registro que haya en el conjunto
                 dataSnapshot.children.forEach { child ->
-                    val currentTit = child.child("titulo").getValue<String>()//Obtenemos el título del hijo actual
+                    currentTit = child.child("titulo").getValue<String>()!!//Obtenemos el título del hijo actual
                     titulosFb += "$currentTit," //Lo concatenamos al string de los títulos
 
                     //Creamos un objeto juego con cada dato del registro en concreto

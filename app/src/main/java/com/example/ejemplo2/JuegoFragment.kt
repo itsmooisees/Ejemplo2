@@ -89,9 +89,9 @@ class JuegoFragment : Fragment() {
 
                 //Cuando no haya pasado nada de lo anterior, será que to esta correcto y pasará por aquí para crear un objeto juego e introducirlo
                 else -> {
-                    val user = Firebase.auth.currentUser
+                    val user = Firebase.auth.currentUser!!
 
-                    val juego = Juego(titulo, genero, anio.toInt(), descr, 0f, 0, foto, "", "", user?.email)
+                    val juego = Juego(titulo, genero, anio.toInt(), descr, 0f, 0, foto, "", "", user.email)
                     myRef.child(myRef.push().key.toString()).setValue(juego) //Obtenemos un hijo y le metemos una key ¿generada automáticamente? y los datos correspondientes
 
                     //Informamos de que se ha añadido bien

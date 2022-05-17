@@ -33,9 +33,9 @@ class DetalleFragment : Fragment() {
     private val database = Firebase.database //Obtenemos la instancia de la bbdd del proyecto actual
     private val myRef = database.getReference("juegos") //Obtenemos la referencia de la tabla indicada
     private lateinit var messagesListener: ValueEventListener
-    private var valorado = false //Variable un poco random para controlar si ya se ha valorado o no y parar el ondatachange ese, para que cuando el usuario cambie algo, las entradas no se actualicen infinitamente, se rallaba la bbdd
-    private val user = Firebase.auth.currentUser //Obtenemos el usuario actual
+    private val user = Firebase.auth.currentUser!! //Obtenemos el usuario actual
 
+    private var valorado = false //Variable un poco random para controlar si ya se ha valorado o no y parar el ondatachange ese, para que cuando el usuario cambie algo, las entradas no se actualicen infinitamente, se rallaba la bbdd
     private val maxLimit = 3 //Variable utilizada para controlar hasta qué numero de personas que hayan valorado un juego se puede llegar para dejar a un usuario eliminar dicho juego
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -119,7 +119,7 @@ class DetalleFragment : Fragment() {
                             emails.forEach { email ->
 
                                 //Si el email actual del foreach coincide con el email del usuario actual que está usando la app, entonces querrá decir que el usuario ya ha valorado, con lo cual no podemos dejarla volver a valorar
-                                if (email == user?.email) {
+                                if (email == user.email) {
                                     existe = true //Cambiamos la variable existe a true para que no pueda acceder al if de abajo, y en consecuencia, no pueda volver a valorar
                                     val index = indice //Variable que tendrá el valor del índice cuando haya encontrado el juego y se lo pasará a confirmación, ya que si se le pasaba directamente índice, lo que le pasaba era el último número, cuando el índice había llegado al final
 
@@ -147,7 +147,7 @@ class DetalleFragment : Fragment() {
                                         //Serie de variables en las que vamos a guardar distintas cosas
                                         val conjunto = args.juego.conjunto!! + ratingBarValDetalle.rating //Recogemos el número del conjunto de valoraciones sumadas y le sumamos la valoración actual del usuario
                                         val personas = args.juego.personas!! + 1 //Recogemos el número de personas que han valorado ese juego y le sumamos uno
-                                        val usuarios = args.juego.usuarios + user?.email + "," //Recogemos el string con todos los emails que han valorado y le añadimos el email del usuario actual más una coma para separar
+                                        val usuarios = args.juego.usuarios + user.email + "," //Recogemos el string con todos los emails que han valorado y le añadimos el email del usuario actual más una coma para separar
                                         val valoracs = args.juego.valoracInd + ratingBarValDetalle.rating + "," //Recogemos el string con todas las valoraciones de los usuarios y le añadimos la valoración actual recogida del ratingbar más una coma para separar
 
                                         //Llamamos a actualiza pasándole los datos que tiene que modificar en la base junto con el hijo en concreto sobre el que tiene que modificar
@@ -192,7 +192,7 @@ class DetalleFragment : Fragment() {
     private fun eliminaJuego(titulo: String, child: DataSnapshot) {
         //Lo primero que hacemos es comprobar si el email que viene de los argumentos, que es el del usuario que lo ha subido, coincide con el email del usuario actual.
         //En caso de que coincida, será que es el usuario que lo ha subido, con lo cual mostraremos la visibilidad del botón para que el usuario pueda interactuar con él y borrar o no el juego. Si no coincide, no cambiará nada, con lo cual el botón seguirá oculto y no se hará nada
-        if (args.juego.uploader == user?.email) {
+        if (args.juego.uploader == user.email) {
             binding.iVpapelera.visibility = View.VISIBLE //Lo setteamos a visible
 
             binding.iVpapelera.setOnClickListener { view -> //Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla

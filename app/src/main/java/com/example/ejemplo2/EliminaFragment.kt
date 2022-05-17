@@ -48,7 +48,6 @@ class EliminaFragment : Fragment() {
                                     Toast.makeText(activity, R.string.noElim, Toast.LENGTH_SHORT).show()
                                 }
                             }
-
                     }
 
                     //Si el rbno está marcado, querrá decir que el usuario no quiere eliminar la cuenta, con lo cual le informamos con un mensajito y volvemos a la feed

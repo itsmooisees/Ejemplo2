@@ -17,11 +17,12 @@ class UserFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
-        val user = Firebase.auth.currentUser //Obtenemos el usuario actual
+
+        val user = Firebase.auth.currentUser!! //Obtenemos el usuario actual
 
         binding.apply {
-            tVuserFb.text = user?.displayName //Setteamos en el primer tv el usuario
-            tVemailFb.text = user?.email //Y en el segundo tv el email, para mostrarle esa información al usuario
+            tVuserFb.text = user.displayName //Setteamos en el primer tv el usuario
+            tVemailFb.text = user.email //Y en el segundo tv el email, para mostrarle esa información al usuario
 
             //Si le da al botón de modificar avanzamos al fragment modifica
             buttonMod.setOnClickListener { view: View ->
