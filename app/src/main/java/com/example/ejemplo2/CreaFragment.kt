@@ -1,11 +1,16 @@
 package com.example.ejemplo2
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -34,6 +39,7 @@ class CreaFragment : Fragment() {
         //Llamamos al método para crear una cuenta y para activar o desactivar el botón
         crearCuenta()
         activaBoton()
+        clickTexto()
 
         return binding.root
     }
@@ -142,6 +148,25 @@ class CreaFragment : Fragment() {
                 buttonCrear.isEnabled = checkBoxTerm.isChecked
             }
         }
+    }
+
+
+    /**
+     * Método para añadir un clickable al texto
+     */
+    private fun clickTexto() {
+        val spannableString = SpannableString(getString(R.string.checkBox))
+
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(p0: View) {
+                Toast.makeText(activity, "HAS CLICADO", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 22, 37, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.tVterm.setText(spannableString, TextView.BufferType.SPANNABLE)
+        binding.tVterm.movementMethod = LinkMovementMethod.getInstance()
     }
 
 }

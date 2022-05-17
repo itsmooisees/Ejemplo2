@@ -33,11 +33,11 @@
             android:text="@string/crearB"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/checkBoxTerm"
+            app:layout_constraintEnd_toEndOf="@+id/eTconfirma"
             app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="@+id/checkBoxTerm"
+            app:layout_constraintStart_toStartOf="@+id/eTconfirma"
             app:layout_constraintTop_toBottomOf="@+id/checkBoxTerm"
-            app:layout_constraintVertical_bias="0.213" />
+            app:layout_constraintVertical_bias="0.276" />
 
         <EditText
             android:id="@+id/eTuser"
@@ -92,11 +92,10 @@
 
         <CheckBox
             android:id="@+id/checkBoxTerm"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunitobo"
             android:minHeight="48dp"
-            android:text="@string/checkBox"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/eTconfirma"
             app:layout_constraintHorizontal_bias="0.0"
@@ -120,6 +119,18 @@
             app:layout_constraintTop_toBottomOf="@+id/eTpassCrea"
             app:layout_constraintVertical_bias="0.098"
             tools:ignore="TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/tVterm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunitobo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eTconfirma"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxTerm"
+            app:layout_constraintTop_toBottomOf="@+id/eTconfirma"
+            app:layout_constraintVertical_bias="0.19" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
