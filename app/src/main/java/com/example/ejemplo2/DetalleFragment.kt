@@ -36,6 +36,8 @@ class DetalleFragment : Fragment() {
     private var valorado = false //Variable un poco random para controlar si ya se ha valorado o no y parar el ondatachange ese, para que cuando el usuario cambie algo, las entradas no se actualicen infinitamente, se rallaba la bbdd
     private val user = Firebase.auth.currentUser //Obtenemos el usuario actual
 
+    private val maxLimit = 3 //Variable utilizada para controlar hasta qué numero de personas que hayan valorado un juego se puede llegar para dejar a un usuario eliminar dicho juego
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detalle, container, false)
 
@@ -148,6 +150,7 @@ class DetalleFragment : Fragment() {
                                         val usuarios = args.juego.usuarios + user?.email + "," //Recogemos el string con todos los emails que han valorado y le añadimos el email del usuario actual más una coma para separar
                                         val valoracs = args.juego.valoracInd + ratingBarValDetalle.rating + "," //Recogemos el string con todas las valoraciones de los usuarios y le añadimos la valoración actual recogida del ratingbar más una coma para separar
 
+                                        //Llamamos a actualiza pasándole los datos que tiene que modificar en la base junto con el hijo en concreto sobre el que tiene que modificar
                                         actualiza(conjunto, personas, usuarios, valoracs, child)
 
                                         ratingBarValDetalle.setIsIndicator(true) //Como ya ha valorado, ponemos la ratingbar como indicator pa que no la pueda tocar y se quede con su valoración. La próxima vez que entre al juego también sera indicator pero porque estará pasando por el if del foreach, ya que el email existe
@@ -159,7 +162,7 @@ class DetalleFragment : Fragment() {
                                         //Está deshabilitado porque si no lo hacía, al volver a pulsar en el botón me dice que la valoración se ha registrado pero no debería ya que 1 no puede registrarla y 2 ni siquiera la registra, es decir, no se hace to lo de registrar, pero me muestra el toast así que entiendo que está pasando por este if y no por el otro
                                         //Así que para evitar este "problema" simplemente lo deshabilito y fuera, solo pasa esto al valorar y quedarte en la página, una vez que sales y vuelves a entrar ya sí que entra por el otro if y sale el toast correspondiente. Pero me gustaría saber por qué pasa esto
                                         buttonEnviar.isEnabled = false
-                                        buttonEnviar.text = getString(R.string.tick)
+                                        buttonEnviar.text = getString(R.string.tick) //Cambiamos el string del botón por un tick para que quede más descriptivo y el usuario sepa que ya se ha votado y que se ha deshabilitado el botón, y no se quede eso como enviar
 
                                         valorado = true //Setteamos valorado a true para que el ondatachange no se raye y no cambie los valores infinitamente. Ns si esto es muy guarro pero es la forma que he encontrado para "detener" el ondatachange. Supongo que habrá otra función más adecuada pero no sé cuál es
                                     }
@@ -188,24 +191,24 @@ class DetalleFragment : Fragment() {
      */
     private fun eliminaJuego(titulo: String, child: DataSnapshot) {
         //Lo primero que hacemos es comprobar si el email que viene de los argumentos, que es el del usuario que lo ha subido, coincide con el email del usuario actual.
-        //En caso de que coincida, será que es el usuario que lo ha subido, con lo cual mostraremos la visibilidad del botón para que el usuario pueda interactualr con él y borrar o no el juego. Si no coincide, no cambiará nada, con lo cual el botón seguirá oculto
+        //En caso de que coincida, será que es el usuario que lo ha subido, con lo cual mostraremos la visibilidad del botón para que el usuario pueda interactuar con él y borrar o no el juego. Si no coincide, no cambiará nada, con lo cual el botón seguirá oculto y no se hará nada
         if (args.juego.uploader == user?.email) {
             binding.iVpapelera.visibility = View.VISIBLE //Lo setteamos a visible
 
             binding.iVpapelera.setOnClickListener { view -> //Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla
                 val alertDialog = AlertDialog.Builder(requireActivity()) //Creamos un alertdialog para informar al usuario
 
-                if (args.juego.personas!! > 3) { //En caso de que el número de personas que ha votado sea mayor a 3, el usuario no podrá eliminar el juego, ya que considero que han votado suficientes personas como para borrar sus valoraciones
+                if (args.juego.personas!! > maxLimit) { //En caso de que el número de personas que ha votado sea mayor al límite establecido al principio de la clase, el usuario no podrá eliminar el juego, ya que considero que han votado suficientes personas como para borrar sus valoraciones
 
                     alertDialog.apply {
                         setTitle(getString(R.string.error)) //Le ponemos un título de error
 
-                        setMessage(getString(R.string.noElimJue)) //Mostramos un mensaje para informar al usuario de por qué no se borra el juego
+                        setMessage(getString(R.string.noElimJue) + " $maxLimit " + getString(R.string.noElimJue2)) //Mostramos un mensaje para informar al usuario de por qué no se borra el juego
 
                         setPositiveButton(getString(R.string.enten)) { _, _ -> } //Añadimos un botón para que el usuario simplemente lo pulse para cerrar el alertdialog, aunque también puede pulsar fuera del diálogo y tendrá el mismo efecto. No hace nada, simplemente cerrar
                     }.create().show()
 
-                } else { //Si hay 3 personas o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
+                } else { //Si hay el límite de personas indicado personas o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
 
                     alertDialog.apply {
                         setTitle((getString(R.string.confirm)))
@@ -277,7 +280,7 @@ class DetalleFragment : Fragment() {
         alertDialog.apply {
             setTitle(getString(R.string.confirm)) //Setteamos el título al dialog
 
-            setMessage("¿" + getString(R.string.seguro) + " $titulo?") //Setteamos el mensaje sobre el cual queremos que el usuario decida
+            setMessage(getString(R.string.seguro) + " $titulo?") //Setteamos el mensaje sobre el cual queremos que el usuario decida
 
             //Establecemos las acciones para el botón de respuesta positiva, setteándole en los paréntesis el texto que queremos que se muestre en cada botón
             setPositiveButton(getString(R.string.siVal)) { _, _ ->
@@ -311,7 +314,7 @@ class DetalleFragment : Fragment() {
                 actualiza(conjunto, personas, email, valoracs, child)
 
                 binding.apply {
-                    //Ya que vamos a eliminar la varoración, es conveniente que esta no se quede ya reflejada gráficamente en la vista, ya que no es la realidad
+                    //Ya que vamos a eliminar la valoración, es conveniente que esta no se quede ya reflejada gráficamente en la vista, ya que no es la realidad
                     //La realidad es que la valoración ya no existe, de forma que ese usuario no ha valorado, y poner ahí la valoración antigua hasta que se refresue el fragment no es lo más correcto, así que
                     ratingBarValDetalle.rating = 0f //establecemos el rating a 0, como si no hubiera valorado, ya que es la valoración que hay ahora (ninguna, no 0, pero bueno xd)
                     buttonEnviar.isEnabled = false //Deshabilitamos el botón para que no pueda volver a borrar y haga cosas raras (la ratingbar ya estaba deshabilitada de antes, con lo cual no puede tocarla hasta que se refresque el fragment y cambie to)

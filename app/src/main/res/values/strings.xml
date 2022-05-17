@@ -58,7 +58,7 @@
     <string name="borra">Borrar</string>
     <string name="tick">✓</string>
     <string name="confirm">Confirmación</string>
-    <string name="seguro">Estás seguro de que quieres eliminar tu valoración del juego</string>
+    <string name="seguro">¿Estás seguro de que quieres eliminar tu valoración del juego</string>
     <string name="seguroJue">Vas a eliminar el juego</string>
     <string name="seguroJue2">. Se perderán todos sus datos y las valoraciones registradas hasta el momento. ¿Quieres continuar?</string>
     <string name="siVal">Sí</string>
@@ -66,7 +66,8 @@
     <string name="regVal">Tu valoración se ha registrado</string>
     <string name="elimVal">Se ha eliminado tu valoración</string>
     <string name="error">Error</string>
-    <string name="noElimJue">No puedes eliminar el juego porque ya han valorado más de 3 personas. Ponte en contacto con el administrador.</string>
+    <string name="noElimJue">No puedes eliminar el juego porque ya han valorado más de</string>
+    <string name="noElimJue2">personas. Ponte en contacto con el desarrollador.</string>
     <string name="enten">Entendido</string>
     <string name="elimJue">Se ha eliminado el juego correctamente</string>
 
