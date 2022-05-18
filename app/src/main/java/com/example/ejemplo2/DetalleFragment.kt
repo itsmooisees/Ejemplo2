@@ -80,9 +80,8 @@ class DetalleFragment : Fragment() {
                 tVnumVal.text = valorEleg
             }
 
-            //Aplicamos la imagen con el string que viene de args
-            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.ic_broken_image)).into(iVjuegoDetalle)
-            //OJO PARA MOSTRAR U OCULTAR ALGO: setVisibility(View.GONE/VISIBLE)
+            //Aplicamos la imagen con el string que viene de args, y le setteamos también un placeholder, que será una imagen que se mostrará mientras carga la verdadera, y una imagen de error que se mostrará en caso de que haya algún fallo al obtener la imagen verdadera, presumiblemente porque la url escrita no contenga una imagen
+            Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuegoDetalle)
         }
     }
 
@@ -208,19 +207,21 @@ class DetalleFragment : Fragment() {
                         setPositiveButton(getString(R.string.enten)) { _, _ -> } //Añadimos un botón para que el usuario simplemente lo pulse para cerrar el alertdialog, aunque también puede pulsar fuera del diálogo y tendrá el mismo efecto. No hace nada, simplemente cerrar
                     }.create().show()
 
-                } else { //Si hay el límite de personas indicado personas o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
+                } else { //Si hay el límite de personas indicado o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
 
                     alertDialog.apply {
-                        setTitle((getString(R.string.confirm)))
+                        setTitle((getString(R.string.confirm))) //Le ponemos un título de confirmación
 
-                        setMessage(getString(R.string.seguroJue) + " $titulo" + getString(R.string.seguroJue2))
+                        setMessage(getString(R.string.seguroJue) + " $titulo" + getString(R.string.seguroJue2)) //Avisamos de que se va a borrar el juego, indicamos su nombre y un poco más de info
 
+                        //En caso de que el usuario realmente quiera borrar el juego, accedemos al hijo de my ref por la clave de este y lo removeamos, avisamos con un toast y navegamos a la feed, que se actualizará ya sin el juego
                         setPositiveButton(getString(R.string.siVal)) { _, _ ->
                             myRef.child(child.key!!).removeValue()
                             Toast.makeText(activity, R.string.elimJue, Toast.LENGTH_SHORT).show()
                             view.findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
                         }
 
+                        //En caso de que no quiera borrar el juego, simplemente informamos de que se ha cancelado y no hacemos nada
                         setNegativeButton(getString(R.string.noVal)) { _, _ ->
                             Toast.makeText(activity, R.string.cancel, Toast.LENGTH_SHORT).show()
                         }

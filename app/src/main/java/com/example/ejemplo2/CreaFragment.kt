@@ -36,7 +36,7 @@ class CreaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_crea, container, false)
 
-        //Llamamos al método para crear una cuenta y para activar o desactivar el botón
+        //Llamamos al método para crear una cuenta, al método de activar o desactivar el botón, y al método de los términos
         crearCuenta()
         activaBoton()
         clickTexto()
@@ -102,8 +102,8 @@ class CreaFragment : Fragment() {
                         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) { task ->
                             //En caso de que la tarea sea exitosa, quiere decir que se ha registrado correctamente. Entonces, procederemos a guardar el nombre del usuario
                             if (task.isSuccessful) {
-                                    //Obtenemos el usuario actual, que es el recién creado y que no tiene el nombre del usuario metido
-                                    val user = Firebase.auth.currentUser!!
+                                //Obtenemos el usuario actual, que es el recién creado y que no tiene el nombre del usuario metido
+                                val user = Firebase.auth.currentUser!!
 
                                 //Hacemos un userprofile... en el cual setteamos el displayName con lo que el usuario ha escrito en el edittext
                                 val profileUpdates = userProfileChangeRequest {
@@ -154,16 +154,21 @@ class CreaFragment : Fragment() {
      * Método para añadir un clickable al texto
      */
     private fun clickTexto() {
+        //Creamos un spannablestring del texto al que queremos añadirle un click
         val spannableString = SpannableString(getString(R.string.checkBox))
 
+        //Después creamos un clickablespan para definir qué va a pasar cuando se clique en el texto
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(p0: View) {
+                //El click va a hacer que naveguemos al fragment de los términos
                 p0.findNavController().navigate(R.id.action_creaFragment_to_termsFragment)
             }
         }
 
+        //Al spannablestring hay que añadirle el clickablespan para que se le pueda hacer click, dónde va a comenzar y dónde va a terminar la zona del texto que se quiere clicar, y el último argumento ns qué es xdd
         spannableString.setSpan(clickableSpan, 22, 37, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+        //Setteamos el spannablestring al tv, junto con un buffertype y obtenemos la instancia del linkmovementmethod
         binding.tVterm.setText(spannableString, TextView.BufferType.SPANNABLE)
         binding.tVterm.movementMethod = LinkMovementMethod.getInstance()
     }

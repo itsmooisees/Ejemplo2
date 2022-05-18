@@ -20,10 +20,11 @@ class JuegosViewHolder(view: View): RecyclerView.ViewHolder(view) {
      */
     fun pinta(juego: Juego) {
         binding.apply {
+            //Aplicamos cada dato a su correspondiente tv
             tVtituloJuego.text = juego.titulo
             tVgeneroJuego.text = juego.genero
             tVanioJuego.text = juego.anio.toString()
-            Glide.with(iVjuego.context).load(juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.ic_broken_image)).into(iVjuego)
+            Glide.with(iVjuego.context).load(juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuego)
 
             //onclicklistener para que cuando el usuario pulse en el item, se avance a la pantalla del detalle
             itemView.setOnClickListener { view: View ->
