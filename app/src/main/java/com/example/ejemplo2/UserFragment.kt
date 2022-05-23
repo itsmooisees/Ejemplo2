@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.ejemplo2.databinding.FragmentUserBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -25,13 +26,13 @@ class UserFragment : Fragment() {
             tVemailFb.text = user.email //Y en el segundo tv el email, para mostrarle esa información al usuario
 
             //Si le da al botón de modificar avanzamos al fragment modifica
-            buttonMod.setOnClickListener { view: View ->
-                view.findNavController().navigate(R.id.action_userFragment_to_modificaFragment)
+            buttonMod.setOnClickListener {
+                findNavController().navigate(R.id.action_userFragment_to_modificaFragment)
             }
 
             //Si le da al botón de eliminar, avanzamos al fragment elimina
-            buttonElim.setOnClickListener { view: View ->
-                view.findNavController().navigate(R.id.action_userFragment_to_eliminaFragment)
+            buttonElim.setOnClickListener {
+                findNavController().navigate(R.id.action_userFragment_to_eliminaFragment)
             }
         }
 

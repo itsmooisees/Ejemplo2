@@ -12,7 +12,7 @@ import android.widget.RatingBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -82,6 +82,10 @@ class DetalleFragment : Fragment() {
 
             //Aplicamos la imagen con el string que viene de args, y le setteamos también un placeholder, que será una imagen que se mostrará mientras carga la verdadera, y una imagen de error que se mostrará en caso de que haya algún fallo al obtener la imagen verdadera, presumiblemente porque la url escrita no contenga una imagen
             Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuegoDetalle)
+
+            buttonOpin.setOnClickListener {
+                findNavController().navigate(R.id.action_detalleFragment_to_opinionesFragment)
+            }
         }
     }
 
@@ -194,7 +198,7 @@ class DetalleFragment : Fragment() {
         if (args.juego.uploader == user.email) {
             binding.iVpapelera.visibility = View.VISIBLE //Lo setteamos a visible
 
-            binding.iVpapelera.setOnClickListener { view -> //Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla
+            binding.iVpapelera.setOnClickListener {//Y le ponemos un onclicklistener a la imagen, para que el usuario pueda clicarla
                 val alertDialog = AlertDialog.Builder(requireActivity()) //Creamos un alertdialog para informar al usuario
 
                 if (args.juego.personas!! > maxLimit) { //En caso de que el número de personas que ha votado sea mayor al límite establecido al principio de la clase, el usuario no podrá eliminar el juego, ya que considero que han votado suficientes personas como para borrar sus valoraciones
@@ -218,7 +222,7 @@ class DetalleFragment : Fragment() {
                         setPositiveButton(getString(R.string.siVal)) { _, _ ->
                             myRef.child(child.key!!).removeValue()
                             Toast.makeText(activity, R.string.elimJue, Toast.LENGTH_SHORT).show()
-                            view.findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
+                            findNavController().navigate(R.id.action_detalleFragment_to_feedFragment)
                         }
 
                         //En caso de que no quiera borrar el juego, simplemente informamos de que se ha cancelado y no hacemos nada

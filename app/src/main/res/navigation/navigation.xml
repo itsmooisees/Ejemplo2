@@ -144,10 +144,23 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/feedFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detalleFragment_to_opinionesFragment"
+            app:destination="@id/opinionesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
     <fragment
         android:id="@+id/termsFragment"
         android:name="com.example.ejemplo2.TermsFragment"
         android:label="TermsFragment"
         tools:layout="@layout/fragment_terms"/>
+
+    <fragment
+        android:id="@+id/opinionesFragment"
+        android:name="com.example.ejemplo2.OpinionesFragment"
+        android:label="OpinionesFragment"
+        tools:layout="@layout/fragment_opiniones"/>
 </navigation>

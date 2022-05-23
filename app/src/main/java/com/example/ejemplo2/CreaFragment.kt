@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.ejemplo2.databinding.FragmentCreaBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -51,7 +52,7 @@ class CreaFragment : Fragment() {
     private fun crearCuenta() {
         binding.apply {
             //Ponemos un listener al botón para que haga la lógica cuando lo pulsamos
-            buttonCrear.setOnClickListener { view: View ->
+            buttonCrear.setOnClickListener {
                 //Recogemos los datos de los cuatro campos
                 val usu = eTuser.text.toString()
                 val email = eTemailCrea.text.toString()
@@ -115,7 +116,7 @@ class CreaFragment : Fragment() {
                                     //En caso de que la tarea sea exitosa, informamos de que to está correcto y avanzamos al feed
                                     if (task.isSuccessful) {
                                         Toast.makeText(activity, R.string.creada, Toast.LENGTH_SHORT).show()
-                                        view.findNavController().navigate(R.id.action_creaFragment_to_feedFragment)
+                                        findNavController().navigate(R.id.action_creaFragment_to_feedFragment)
                                     } else {
                                         //Este else se supone que es por si falla algo con el usuario, para volver a habilitar el botón, pero no sé que puede fallar
                                         //Abajo sí tiene sentido, ya que puede fallar al crear el correo como explico en el comentario, ero aquí no sé cómo puede fallar (estaría bien COMPROBAR)

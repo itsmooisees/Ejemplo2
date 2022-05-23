@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ejemplo2.adapter.JuegosAdapter
 import com.example.ejemplo2.databinding.FragmentFeedBinding
@@ -41,14 +42,14 @@ class FeedFragment : Fragment() {
             buttonUsuario.text = user.displayName //Setteamos en el botón el nombre del usuario
 
             //onclicklistener para pasar de la feed al fragment de nuevo juego
-            buttonJuego.setOnClickListener { view: View ->
+            buttonJuego.setOnClickListener {
                 val action = FeedFragmentDirections.actionFeedFragmentToJuegoFragment(titulosFb) //Le adjuntamos el argumento que queremos pasar al fragment juego
-                view.findNavController().navigate(action)
+                findNavController().navigate(action)
             }
 
             //onclicklistener para pasar de la feed al fragment de usuario
-            buttonUsuario.setOnClickListener { view: View ->
-                view.findNavController().navigate(R.id.action_feedFragment_to_userFragment)
+            buttonUsuario.setOnClickListener {
+                findNavController().navigate(R.id.action_feedFragment_to_userFragment)
             }
         }
 

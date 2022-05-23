@@ -32,7 +32,7 @@
 
     <!--- FRAGMENT TERMINOS -->
     <string name="terms">TERMINOS</string>
-    <string name="textTerms">Al registrarte y utilizar la aplicación aceptas los siguientes términos del servicio:\n\n1.- El tratamiento de los datos de inicio de sesión es seguro, de forma que el desarrollador no tiene la capacidad de ver o administrar las contraseñas de los usuarios.\n\n2.- El desarrollador se reserva el derecho de suspender las cuentas de aquellos usuarios que hagan un uso indebido de la aplicación, como la inclusión de imágenes que no correspondan o textos con contenido ofensivo.\n\n3.- Es posible que se guarde la información sobre la dirección IP para poder aplicar las restricciones a los usuarios e impedir la creación de cuentas nuevas.\n\n4.- No copyright infringement intended. All rights are reserved to the original owners, Nintendo and the other trademarks that may appear in-app.</string>
+    <string name="textTerms">Al registrarte y utilizar la aplicación aceptas los siguientes términos del servicio:\n\n1.- El tratamiento de los datos de inicio de sesión es seguro, de forma que el desarrollador no tiene la capacidad de ver o administrar las contraseñas de los usuarios.\n\n2.- El desarrollador se reserva el derecho de suspender las cuentas de aquellos usuarios que hagan un uso indebido de la aplicación, como la inclusión de imágenes que no correspondan o textos con contenido ofensivo.\n\n3.- Los usuarios son responsables de que la información que publiquen en la aplicación sea veraz, correcta y esté bien escrita, siguiendo las reglas de puntuación.\n\n4.- Es posible que se guarde la información sobre la dirección IP o el modelo del dispositivo para poder aplicar las restricciones a los usuarios e impedir la creación de cuentas nuevas.\n\n5.- No se solicita ningún permiso al usuario, de forma que la aplicación no va a acceder al almacenamiento, llamadas, ubicación o cualquier otra función que involucre datos personales.\n\n6.- No copyright infringement intended. All rights are reserved to the original owners, Nintendo and the other trademarks that may appear in-app.</string>
 
 
     <!--- FRAGMENT FEED -->
@@ -61,6 +61,7 @@
     <string name="tuVal">Tu valoración</string>
     <string name="defVal">0.0 / 5</string>
     <string name="ceroPers">- / 5</string>
+    <string name="opin">OPINIONES</string>
     <string name="env">Enviar</string>
     <string name="borra">Borrar</string>
     <string name="tick">✓</string>

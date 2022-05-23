@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.ejemplo2.databinding.FragmentPrimerBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -44,7 +45,7 @@ class PrimerFragment : Fragment() {
     private fun iniciaSesion() {
         binding.apply {
             //Al pulsar el botón
-            buttonEntrar.setOnClickListener { view: View ->
+            buttonEntrar.setOnClickListener {
                 //Recogemos los datos del et
                 val email = eTemail.text.toString()
                 val contra = eTpass.text.toString()
@@ -66,7 +67,7 @@ class PrimerFragment : Fragment() {
                             if (task.isSuccessful) {
                                 //En caso de que se haya iniciado sesión correctamente porque las credenciales son correctas, informamos y avanzamos al feed
                                 Toast.makeText(activity, R.string.inicio, Toast.LENGTH_SHORT).show()
-                                view.findNavController().navigate(R.id.action_primerFragment_to_feedFragment)
+                                findNavController().navigate(R.id.action_primerFragment_to_feedFragment)
                             } else {
                                 //En caso de que la tarea haya fallado, informamos de que hay algo mal y volvemos a activar el botón
                                 buttonEntrar.isEnabled = true

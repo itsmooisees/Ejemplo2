@@ -27,10 +27,10 @@ class JuegosViewHolder(view: View): RecyclerView.ViewHolder(view) {
             Glide.with(iVjuego.context).load(juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuego)
 
             //onclicklistener para que cuando el usuario pulse en el item, se avance a la pantalla del detalle
-            itemView.setOnClickListener { view: View ->
+            itemView.setOnClickListener {
                 //En action van los valores de cada variable metidos en un objeto juego, pasandolo por directions para que le llegue al fragment detalle
                 val action = FeedFragmentDirections.actionFeedFragmentToDetalleFragment(juego)
-                view.findNavController().navigate(action) //Navegamos con el navcontroller pasándole el action
+                it.findNavController().navigate(action) //Navegamos con el navcontroller pasándole el action
             }
         }
 

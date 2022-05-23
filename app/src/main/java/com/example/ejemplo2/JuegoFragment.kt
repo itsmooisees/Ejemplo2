@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ejemplo2.databinding.FragmentJuegoBinding
 import com.google.firebase.auth.ktx.auth
@@ -24,11 +25,11 @@ class JuegoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_juego, container, false)
 
-        binding.buttonAniade.setOnClickListener { view: View ->
+        binding.buttonAniade.setOnClickListener {
             //Si la llamada a la función recogeDatos devuelve un true, entonces el juego se ha insertado correctamente y podemos volver al feed
             //Pensándolo bien ahora, no veo muy necesario hacer esta movida y andar devolviendo trues o falses, directamente poner el navigate en el else del when y fuera, pero bueno ya que está hecho  así se queda, es algo distinto jeje
             if (recogeDatos())
-                view.findNavController().navigate(R.id.action_juegoFragment_to_feedFragment)
+                findNavController().navigate(R.id.action_juegoFragment_to_feedFragment)
         }
 
         return binding.root
