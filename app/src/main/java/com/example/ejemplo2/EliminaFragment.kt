@@ -38,16 +38,17 @@ class EliminaFragment : Fragment() {
                     //Si el rbsi está marcado, entonces será que el usuario quiere borrarlo, con lo cual llamamos a la funcion para ello
                     radioButtonSi.isChecked -> {
                         user.delete().addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    //Si se ha podido completar la tarea con éxito, que debería ser así siempre, informamos al usuario con un mensajito y finalizamos la activity, cerrándose así la aplicación
-                                    Toast.makeText(activity, R.string.elimBien, Toast.LENGTH_SHORT).show()
-                                    activity?.finish()
-                                } else {
-                                    //Solo me ha petado una vez el if y ya no recuerdo por qué
-                                    //Por mucho que he intentado volver a petarlo no he podido, pero se queda este filtro aquí por si aca
-                                    Toast.makeText(activity, R.string.noElim, Toast.LENGTH_SHORT).show()
-                                }
+                            if (task.isSuccessful) {
+                                //Si se ha podido completar la tarea con éxito, que debería ser así siempre, informamos al usuario con un mensajito y finalizamos la activity, cerrándose así la aplicación
+                                Toast.makeText(activity, R.string.elimBien, Toast.LENGTH_SHORT).show()
+                                activity?.finish()
+                            } else {
+                                //Solo me ha petado una vez el if y ya no recuerdo por qué
+                                //Por mucho que he intentado volver a petarlo no he podido, pero se queda este filtro aquí por si aca
+                                //Actualizo un tiempo después, no sé por qué pero me ha vuelto a petar y pasar por aquí. No ha sido una vez, siempre que le daba no me dejaba, hasta que cerré la aplicación y la volví a abrir y ahí ya sí me dejó, así que el filtro este se queda xd
+                                Toast.makeText(activity, R.string.noElim, Toast.LENGTH_SHORT).show()
                             }
+                        }
                     }
 
                     //Si el rbno está marcado, querrá decir que el usuario no quiere eliminar la cuenta, con lo cual le informamos con un mensajito y volvemos a la feed

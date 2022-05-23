@@ -72,7 +72,7 @@ class DetalleFragment : Fragment() {
             if (personas > 0)
                 tVvalFb.text = "%.2f".format(args.juego.conjunto!! / personas) + " / 5" //Redondeamos el número a las centésimas para que solo aparezcan dos decimales en vez de muchos cuando los haya
             else
-                tVvalFb.text = "- / 5"
+                tVvalFb.text = getString(R.string.ceroPers)
 
             //Aquí escuchamos constantemente cuando cambia la barra de valoración para settear en un tv su valor numérico
             ratingBarValDetalle.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener { _, _, _ ->
@@ -126,7 +126,7 @@ class DetalleFragment : Fragment() {
                                         ratingBarValDetalle.setIsIndicator(true) //Ponemos la ratingbar como indicator para que el usuario no pueda tocarla, ya que es simplemente visual en este caso para mostrar visualmente la valoración que dio en su momento el usuario
                                         ratingBarValDetalle.rating = valoraciones[index].toFloat() //Establecemos la valoración en la ratingbar, cogiéndola de la lista de valoraciones, por el índice que se ha ido incrementando a medida que iba buscando el email del usuario, y convirtiéndolo a float para poder asignarlo a la ratingbar
 
-                                        buttonEnviar.text = activity?.getString(R.string.borra) //Setteamos el texto del botón a borrar, ya que existe la valoración y la función que hará entonces el botón será la de borrarla (tengo que poner lo de activity? porque si no había veces que petaba la app al hacer el getstring ns pq xd)
+                                        buttonEnviar.text = getString(R.string.borra) //Setteamos el texto del botón a borrar, ya que existe la valoración y la función que hará entonces el botón será la de borrarla (tengo que poner lo de activity? porque si no había veces que petaba la app al hacer el getstring ns pq xd)
 
                                         //onclicklistener por si el usuario vuelve a pinchar si ya ha valorado, para informarle de que ya ha valorado, y que así quede mejor que simplemente deshabilitando el botón y que no haga nada
                                         buttonEnviar.setOnClickListener {
@@ -210,7 +210,7 @@ class DetalleFragment : Fragment() {
                 } else { //Si hay el límite de personas indicado o menos, entonces dejaremos borrar el juego al que lo publicó, informamos con un toast y navegamos de nuevo al feed, actualizándose este como siempre
 
                     alertDialog.apply {
-                        setTitle((getString(R.string.confirm))) //Le ponemos un título de confirmación
+                        setTitle(getString(R.string.confirm)) //Le ponemos un título de confirmación
 
                         setMessage(getString(R.string.seguroJue) + " $titulo" + getString(R.string.seguroJue2)) //Avisamos de que se va a borrar el juego, indicamos su nombre y un poco más de info
 
@@ -320,6 +320,10 @@ class DetalleFragment : Fragment() {
                     ratingBarValDetalle.rating = 0f //establecemos el rating a 0, como si no hubiera valorado, ya que es la valoración que hay ahora (ninguna, no 0, pero bueno xd)
                     buttonEnviar.isEnabled = false //Deshabilitamos el botón para que no pueda volver a borrar y haga cosas raras (la ratingbar ya estaba deshabilitada de antes, con lo cual no puede tocarla hasta que se refresque el fragment y cambie to)
                     buttonEnviar.text = getString(R.string.tick) //En el botón establecemos como texto un tick, para que quede mejor y más correcto, ya que dejar como texto borrar cuando ya se ha hecho eso y encima no se puede pulsar el botón no queda muy bien
+
+                    //En caso de que solo un usuario haya votado y este mismo elimine su valoración, quedarán 0 personas, con lo cual la división será entre 0 y volverá a salir el NaN, así que ponemos aquí el filtrito este pa que lo ponga a 0
+                    if (personas == 0)
+                        tVvalFb.text = getString(R.string.ceroPers)
                 }
 
                 valorado = true //Ponemos la movida esta a true para que no vuelva a actualizar y haga cosas raras xdd

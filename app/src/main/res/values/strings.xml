@@ -17,6 +17,7 @@
     <!--- FRAGMENT CREAR CUENTA -->
     <string name="crear">CREAR CUENTA</string>
     <string name="user">Usuario</string>
+    <string name="contraMin">Contraseña (min. 8 caracteres)</string>
     <string name="conf">Confirma contraseña</string>
     <string name="crearB">Crear</string>
     <string name="checkBox">He leído y acepto los Términos de Uso y la Política de Privacidad</string>
@@ -59,6 +60,7 @@
     <string name="val">Valoración</string>
     <string name="tuVal">Tu valoración</string>
     <string name="defVal">0.0 / 5</string>
+    <string name="ceroPers">- / 5</string>
     <string name="env">Enviar</string>
     <string name="borra">Borrar</string>
     <string name="tick">✓</string>
