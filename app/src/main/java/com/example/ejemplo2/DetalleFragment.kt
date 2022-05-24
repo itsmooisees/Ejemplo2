@@ -84,7 +84,7 @@ class DetalleFragment : Fragment() {
             Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuegoDetalle)
 
             buttonOpin.setOnClickListener {
-                val action = DetalleFragmentDirections.actionDetalleFragmentToOpinionesFragment(args.juego.comentarios!!)
+                val action = DetalleFragmentDirections.actionDetalleFragmentToOpinionesFragment(args.juego.titulo!!)
                 findNavController().navigate(action)
             }
         }
@@ -131,7 +131,7 @@ class DetalleFragment : Fragment() {
                                         ratingBarValDetalle.setIsIndicator(true) //Ponemos la ratingbar como indicator para que el usuario no pueda tocarla, ya que es simplemente visual en este caso para mostrar visualmente la valoración que dio en su momento el usuario
                                         ratingBarValDetalle.rating = valoraciones[index].toFloat() //Establecemos la valoración en la ratingbar, cogiéndola de la lista de valoraciones, por el índice que se ha ido incrementando a medida que iba buscando el email del usuario, y convirtiéndolo a float para poder asignarlo a la ratingbar
 
-                                        buttonEnviar.text = getString(R.string.borra) //Setteamos el texto del botón a borrar, ya que existe la valoración y la función que hará entonces el botón será la de borrarla (tengo que poner lo de activity? porque si no había veces que petaba la app al hacer el getstring ns pq xd)
+                                        buttonEnviar.text = activity?.getString(R.string.borra) //Setteamos el texto del botón a borrar, ya que existe la valoración y la función que hará entonces el botón será la de borrarla (tengo que poner lo de activity? porque si no había veces que petaba la app al hacer el getstring ns pq xd)
 
                                         //onclicklistener por si el usuario vuelve a pinchar si ya ha valorado, para informarle de que ya ha valorado, y que así quede mejor que simplemente deshabilitando el botón y que no haga nada
                                         buttonEnviar.setOnClickListener {

@@ -164,7 +164,7 @@
         android:label="OpinionesFragment"
         tools:layout="@layout/fragment_opiniones">
         <argument
-            android:name="comentarios"
+            android:name="titulo"
             app:argType="string" />
     </fragment>
 </navigation>

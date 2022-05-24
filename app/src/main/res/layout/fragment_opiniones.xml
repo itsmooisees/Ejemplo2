@@ -39,7 +39,7 @@
             android:fontFamily="@font/nunitobo"
             android:gravity="center"
             android:text="@string/vaya"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
