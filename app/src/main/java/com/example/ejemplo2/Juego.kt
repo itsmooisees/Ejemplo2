@@ -15,5 +15,6 @@ data class Juego(
     var foto: String?,
     var usuarios: String?,
     var valoracInd: String?,
-    var uploader: String?
+    var uploader: String?,
+    var comentarios: String?
 ) : Parcelable

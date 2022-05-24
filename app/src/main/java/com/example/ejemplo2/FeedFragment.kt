@@ -85,12 +85,13 @@ class FeedFragment : Fragment() {
                         child.child("foto").getValue<String>(),
                         child.child("usuarios").getValue<String>(),
                         child.child("valoracInd").getValue<String>(),
-                        child.child("uploader").getValue<String>())
+                        child.child("uploader").getValue<String>(),
+                        child.child("comentarios").getValue<String>())
 
                     //Añadimos ese objeto a la MutableList
                     juegosList.add(juego)
-
                 }
+
                 //Le setteamos al adapter del recyclerView el adaptador que hemos creado antes, pasándole a este la MutableList con todos los juegos
                 binding.juegosRecyclerView.adapter = JuegosAdapter(juegosList)
                 binding.iVcarga.visibility = View.GONE
@@ -103,7 +104,6 @@ class FeedFragment : Fragment() {
         }
 
         myRef.addValueEventListener(messagesListener)
-
     }
 
 }

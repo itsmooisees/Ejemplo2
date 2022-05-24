@@ -162,5 +162,9 @@
         android:id="@+id/opinionesFragment"
         android:name="com.example.ejemplo2.OpinionesFragment"
         android:label="OpinionesFragment"
-        tools:layout="@layout/fragment_opiniones"/>
+        tools:layout="@layout/fragment_opiniones">
+        <argument
+            android:name="comentarios"
+            app:argType="string" />
+    </fragment>
 </navigation>

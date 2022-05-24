@@ -84,7 +84,8 @@ class DetalleFragment : Fragment() {
             Glide.with(iVjuegoDetalle.context).load(args.juego.foto).apply(RequestOptions().placeholder(R.drawable.loading_animation).error(R.drawable.error)).into(iVjuegoDetalle)
 
             buttonOpin.setOnClickListener {
-                findNavController().navigate(R.id.action_detalleFragment_to_opinionesFragment)
+                val action = DetalleFragmentDirections.actionDetalleFragmentToOpinionesFragment(args.juego.comentarios!!)
+                findNavController().navigate(action)
             }
         }
     }
