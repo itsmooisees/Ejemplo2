@@ -84,6 +84,7 @@
     <string name="escrOpi">Escribe aquí tu opinión</string>
     <string name="nadaOpi">¡No has escrito nada!</string>
     <string name="aniadida">Se ha añadido tu opinión</string>
+    <string name="yaOpi">¡Ya has opinado sobre este juego!</string>
 
 
     <!--- FRAGMENT USER -->

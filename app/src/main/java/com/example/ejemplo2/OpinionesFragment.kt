@@ -32,6 +32,7 @@ class OpinionesFragment : Fragment() {
     private lateinit var key: String
 
     private val opinionesList: MutableList<Opinion> = ArrayList()
+    private val usuarios: MutableList<String> = ArrayList()
     private lateinit var stringOpiniones: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -53,29 +54,50 @@ class OpinionesFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 opinionesList.clear()
 
-                val titulo = args.titulo
+                binding.apply {
+                    val titulo = args.titulo
 
-                snapshot.children.forEach { child ->
-                    if (titulo == child.child("titulo").getValue<String>()) {
-                        key = child.key!!
-                        stringOpiniones = child.child("comentarios").getValue<String>()!!
+                    snapshot.children.forEach { child ->
+                        if (titulo == child.child("titulo").getValue<String>()) {
+                            usuarios.clear() //No debería ser necesario limpiar la lista de usuarios que han comentado, ya que estos no tienen la capacidad de eliminar las valoraciones,
+                            //simplemente se van a ir añadiendo usuarios a la lista, pero por si acaso elimino yo alguna opinión pues para que se reflejen los cambios en la lista
 
-                        val opiniones = stringOpiniones.split("|").toMutableList()
-                        opiniones.removeLast()
+                            key = child.key!!
+                            stringOpiniones = child.child("comentarios").getValue<String>()!!
 
-                        if (opiniones.size != 0) {
-                            for (i in 0 until opiniones.size step 2) {
-                                val opinion = Opinion(opiniones[i], opiniones[i + 1])
-                                opinionesList.add(opinion)
+                            val opiniones = stringOpiniones.split("|").toMutableList()
+                            opiniones.removeLast()
+
+                            if (opiniones.size != 0) {
+                                tVaviso.visibility = View.GONE
+
+                                for (i in 0 until opiniones.size step 3) {
+                                    val opinion = Opinion(opiniones[i], opiniones[i + 2])
+                                    opinionesList.add(opinion)
+
+                                    usuarios.add(opiniones[i + 1])
+                                }
+
+                                usuarios.forEach { email ->
+                                    if (email == user.email) {
+                                        buttonCreaOpin.isEnabled = false
+                                        buttonCreaOpin.text = activity?.getString(R.string.tick)
+
+                                        eTopin.isEnabled = false
+                                        eTopin.hint = activity?.getString(R.string.yaOpi) //En estos dos casos sigue reventando así que tengo que ponerle la movida del activity?
+                                    }
+                                }
+
+                            } else {
+                                tVaviso.visibility = View.VISIBLE
                             }
-
-                        } else {
-                            binding.tVaviso.visibility = View.VISIBLE
                         }
                     }
+
+                    opinionesRecyclerView.adapter = OpinionesAdapter(opinionesList)
                 }
 
-                binding.opinionesRecyclerView.adapter = OpinionesAdapter(opinionesList)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -88,13 +110,16 @@ class OpinionesFragment : Fragment() {
     }
 
     private fun aniadeOpinion() {
+
         binding.apply {
-            binding.buttonCreaOpin.setOnClickListener {
+            buttonCreaOpin.setOnClickListener {
+
                 val opinion = eTopin.text.toString()
 
                 if (opinion.isNotEmpty()) {
-                    stringOpiniones += user.displayName + "|" + opinion + "|"
+                    stringOpiniones += user.displayName + "|" + user.email + "|" + opinion + "|"
                     myRef.child(key).child("comentarios").setValue(stringOpiniones)
+
                     Toast.makeText(activity, R.string.aniadida, Toast.LENGTH_SHORT).show()
                     eTopin.setText("")
 
