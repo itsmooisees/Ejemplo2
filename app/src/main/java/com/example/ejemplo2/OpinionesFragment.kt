@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ejemplo2.adapter.OpinionesAdapter
 import com.example.ejemplo2.databinding.FragmentOpinionesBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -26,13 +28,18 @@ class OpinionesFragment : Fragment() {
     private val database = Firebase.database
     private val myRef = database.getReference("juegos")
     private lateinit var messagesListener: ValueEventListener
+    private val user = Firebase.auth.currentUser!!
+    private lateinit var key: String
 
     private val opinionesList: MutableList<Opinion> = ArrayList()
+    private lateinit var stringOpiniones: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_opiniones, container, false)
 
         rVopiniones()
+
+        aniadeOpinion()
 
         return binding.root
     }
@@ -49,8 +56,11 @@ class OpinionesFragment : Fragment() {
                 val titulo = args.titulo
 
                 snapshot.children.forEach { child ->
-                    if (titulo == child.child("titulo").getValue<String>()){
-                        val opiniones = child.child("comentarios").getValue<String>()!!.split("|").toMutableList()
+                    if (titulo == child.child("titulo").getValue<String>()) {
+                        key = child.key!!
+                        stringOpiniones = child.child("comentarios").getValue<String>()!!
+
+                        val opiniones = stringOpiniones.split("|").toMutableList()
                         opiniones.removeLast()
 
                         if (opiniones.size != 0) {
@@ -75,7 +85,25 @@ class OpinionesFragment : Fragment() {
         }
 
         myRef.addValueEventListener(messagesListener)
+    }
 
+    private fun aniadeOpinion() {
+        binding.apply {
+            binding.buttonCreaOpin.setOnClickListener {
+                val opinion = eTopin.text.toString()
+
+                if (opinion.isNotEmpty()) {
+                    stringOpiniones += user.displayName + "|" + opinion + "|"
+                    myRef.child(key).child("comentarios").setValue(stringOpiniones)
+                    Toast.makeText(activity, R.string.aniadida, Toast.LENGTH_SHORT).show()
+                    eTopin.setText("")
+
+                } else {
+                    Toast.makeText(activity, R.string.nadaOpi, Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
     }
 
 }

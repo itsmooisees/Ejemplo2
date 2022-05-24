@@ -167,4 +167,5 @@
             android:name="titulo"
             app:argType="string" />
     </fragment>
+
 </navigation>

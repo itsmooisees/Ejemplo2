@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Nintendo Network</string>
 
-
     <!--- FRAGMENT INICIO SESION -->
     <string name="bienvenido">¡Bienvenido a Nintendo Network!</string>
     <string name="email">Correo electrónico</string>
@@ -82,6 +81,9 @@
 
     <!--- FRAGMENT OPINIONES -->
     <string name="vaya">¡Vaya! Parece que no hay ninguna opinión registrada…</string>
+    <string name="escrOpi">Escribe aquí tu opinión</string>
+    <string name="nadaOpi">¡No has escrito nada!</string>
+    <string name="aniadida">Se ha añadido tu opinión</string>
 
 
     <!--- FRAGMENT USER -->
