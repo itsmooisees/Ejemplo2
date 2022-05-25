@@ -41,7 +41,8 @@ class JuegoFragment : Fragment() {
      */
     private fun recogeDatos(): Boolean {
         val myRef = database.getReference("juegos")
-        val titulosFb = args.titulosFb.split(",") //Recogemos el string que hemos pasado por los args, que contiene todos los titulos recogidos en la feed, y lo splitteamos por comas de forma que se nos cree una lista de strings con cada título individual
+        val titulosFb = args.titulosFb.split(",").toMutableList() //Recogemos el string que hemos pasado por los args, que contiene todos los titulos recogidos en la feed, y lo splitteamos por comas de forma que se nos cree una lista de strings con cada título individual. Cambio a mutablelist para poder eliminar el último campo, el cual está vacío
+        titulosFb.removeLast()
 
         binding.apply {
             //Recogemos todos los datos de los et en variables
