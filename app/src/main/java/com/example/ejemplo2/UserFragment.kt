@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.ejemplo2.databinding.FragmentUserBinding
 import com.google.firebase.auth.ktx.auth

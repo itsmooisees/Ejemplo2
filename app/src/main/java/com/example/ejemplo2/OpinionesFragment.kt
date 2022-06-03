@@ -69,8 +69,7 @@ class OpinionesFragment : Fragment() {
                 binding.apply {
                     snapshot.children.forEach { child ->
                         if (titulo == child.child("titulo").getValue<String>()) {
-                            usuarios.clear() //No debería ser necesario limpiar la lista de usuarios que han comentado, ya que estos no tienen la capacidad de eliminar las valoraciones,
-                            //simplemente se van a ir añadiendo usuarios a la lista, pero por si acaso elimino yo alguna opinión pues para que se reflejen los cambios en la lista
+                            usuarios.clear()
 
                             var contador = -1
 
@@ -114,7 +113,6 @@ class OpinionesFragment : Fragment() {
 
                     opinionesRecyclerView.adapter = OpinionesAdapter(opinionesList)
                 }
-
 
             }
 

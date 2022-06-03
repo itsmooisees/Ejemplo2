@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.ejemplo2.databinding.FragmentJuegoBinding
@@ -75,9 +74,9 @@ class JuegoFragment : Fragment() {
                     false
                 }
 
-                //Si el año introducido no está en ese rango no podemos permitir introducir el juego, ya que o no existían o no ha llegado todavía ese año xd
+                //Si el año introducido no está en ese rango no podemos permitir introducir el juego, ya que o no existía la Switch o no ha llegado todavía ese año xd
                 //Con el in y los .. podemos especificar un rango de números, incluyendo los dos escritos. Si ponemos !in es al revés, si está fuera de ese intervalo
-                anio.toInt() !in 1980..2022 -> {
+                anio.toInt() !in 2017..2022 -> {
                     //Informamos de que la fecha no está bien
                     Toast.makeText(activity, R.string.fechaInc, Toast.LENGTH_SHORT).show()
                     false
